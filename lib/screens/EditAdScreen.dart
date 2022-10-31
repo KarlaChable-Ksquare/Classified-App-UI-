@@ -61,22 +61,46 @@ class _EditAdScreenState extends State<EditAdScreen> {
                         return Container(
                           child: Row(
                             children: [
-                              Container(
-                                margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                                height: 80,
-                                width: 90,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color: Colors.grey.shade500,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Image.network(
-                                  widget.data['imagesAll'][index],
+                              GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      backgroundColor:
+                                          Color.fromARGB(180, 242, 87, 35),
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: SizedBox(
+                                            child: Image.network(
+                                              "${widget.data['imagesAll'][index]}",
+                                              fit: BoxFit.cover,
+                                            ),
+                                            height: 550,
+                                            width: double.infinity,
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
                                   height: 80,
-                                  width: 70,
+                                  width: 90,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(
+                                      color: Colors.grey.shade500,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    margin: EdgeInsets.all(5),
+                                    child: Image.network(
+                                      widget.data['imagesAll'][index],
+                                      height: 80,
+                                      width: 70,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
