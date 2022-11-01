@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (_formKey.currentState!.validate()) {
                                     Navigator.pushReplacementNamed(context, '/',
                                         arguments: {
-                                          'emai': _emailCtrl.text,
+                                          'email': _emailCtrl.text,
                                           'password': _passwordCtrl.text,
                                         });
                                   }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/data/myAds.dart';
 import 'package:practice_navigation/custom_widgets/MyAdsScreen_Card.dart';
-import 'package:practice_navigation/screens/EditAdScreen.dart';
-import 'package:practice_navigation/data/ads.dart';
 
 class MyAdsScreen extends StatelessWidget {
   MyAdsScreen({super.key});

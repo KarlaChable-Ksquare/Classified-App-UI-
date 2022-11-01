@@ -189,10 +189,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   primary: Color.fromRGBO(242, 87, 35, 1),
                                   shape: BeveledRectangleBorder(),
                                 ),
-                                // onPressed: () {
-                                //   Navigator.pushNamed(context, '/myads',
-                                //       arguments: {});
-                                // },
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },

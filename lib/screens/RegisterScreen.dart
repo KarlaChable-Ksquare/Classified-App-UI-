@@ -12,7 +12,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _emailCtrl = TextEditingController();
   TextEditingController _mobileCtrl = TextEditingController();
   TextEditingController _passwordCtrl = TextEditingController();
-  //bool _isTermsAccepted = false;
   var _formKey = GlobalKey<FormState>();
 
   @override

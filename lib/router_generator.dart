@@ -29,7 +29,10 @@ class RouterGenerator {
 
       case '/settings':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: SettingScreen()));
+            builder: (context) => SafeArea(
+                    child: SettingScreen(
+                  data: args,
+                )));
 
       case '/editprofile':
         return MaterialPageRoute(

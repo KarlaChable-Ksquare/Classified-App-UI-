@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(child: HomeScreen()),
-      initialRoute: '/settings',
+      initialRoute: '/login',
       onGenerateRoute: RouterGenerator().routerGenerate,
     );
   }

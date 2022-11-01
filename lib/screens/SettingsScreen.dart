@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+class SettingScreen extends StatefulWidget {
+  dynamic data;
+  SettingScreen({super.key, required this.data});
 
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
   _openURL(url) async {
     url = Uri.parse(url);
     if (await canLaunchUrl(url)) {
@@ -43,7 +49,7 @@ class SettingScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Karla Chable",
+                          Text("Lucila Chable",
                               style: TextStyle(
                                 color: Colors.grey.shade800,
                                 fontWeight: FontWeight.bold,
@@ -51,7 +57,7 @@ class SettingScreen extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text("9999012345",
+                          Text("+529999012345",
                               style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,

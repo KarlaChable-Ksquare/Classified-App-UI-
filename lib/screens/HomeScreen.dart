@@ -3,7 +3,9 @@ import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
 import 'package:practice_navigation/data/ads.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  HomeScreen({
+    super.key,
+  });
   final adsData = InformationAds();
 
   @override

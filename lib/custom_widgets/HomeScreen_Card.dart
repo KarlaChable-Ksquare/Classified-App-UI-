@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'dart:ffi';
 
 class HomeScreenCard extends StatelessWidget {
   String id;
