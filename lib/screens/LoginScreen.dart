@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 340, //450
                 width: double.infinity,
-                child: Image.network("https://i.ibb.co/zPLmJkW/Merlin.jpg",
+                child: Image.network("https://i.ibb.co/PMDnM5V/merida.jpg",
                     fit: BoxFit.cover),
               ),
               Container(
