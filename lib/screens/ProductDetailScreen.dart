@@ -128,7 +128,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 12,
                         ),
                         SizedBox(
-                          height: 68,
                           width: double.infinity,
                           child: Text(
                             "${widget.data['description']}",

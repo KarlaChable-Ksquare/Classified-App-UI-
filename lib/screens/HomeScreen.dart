@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: Text("Ads Listing"),
         actions: [
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.fromLTRB(20, 16, 16, 16),
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12,

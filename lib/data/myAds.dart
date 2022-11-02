@@ -1,10 +1,60 @@
 class InformationMyAds {
   final List _myAds = [
     {
+      "id": "ad_02",
+      "title": "Fire Emblem Figure Ike",
+      "price": 22000,
+      "createdBy": "Karla",
+      "createdAt": "1 days ago",
+      "mobile": "+529999012345",
+      "description":
+          "From the Fire Emblem series comes the second figure in a new series of figures made by the developer of the series, INTELLIGENT SYSTEMS! Ike from 'Fire Emblem: Radiant Dawn' has been brought to life as a 1/7th scale figure.",
+      "images": [
+        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82412/large/43c2d9b2355eee58f535125545be90cf.jpg",
+        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82410/large/f269696c0c91cffc708008fb1808e8e2.jpg",
+        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82416/large/879c4d7c75da51c4b48c4a06cd715bf6.jpg",
+        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82418/large/bd68fdd205a764e14334f5c39da44154.jpg",
+      ],
+    },
+    {
+      "id": "ad_03",
+      "title": "Eevee pokemon plush",
+      "price": 1299,
+      "createdBy": "Karla",
+      "createdAt": "15 days ago",
+      "mobile": "+529999012345",
+      "description":
+          "A Soft Friend for Trainers-in-Training. Enthusiastic and loyal Eevee offers comfort and friendship with this soft, soothing plush that features a washable design so it's easy to keep clean",
+      "images": [
+        "https://www.pokemoncenter.com/products/images/P8667/701-96050/P8667_701-96050_01.jpg",
+        "https://www.pokemoncenter.com/products/images/P8667/701-96050/P8667_701-96050_02.jpg",
+        "https://www.pokemoncenter.com/products/images/P8667/701-96050/P8667_701-96050_03.jpg",
+        "https://www.pokemoncenter.com/products/images/P8667/701-96050/P8667_701-96050_04.jpg"
+      ],
+    },
+    {
       "id": "ad_06",
+      "title": "Nintendo Switch AC",
+      "price": 32999,
+      "createdBy": "Karla",
+      "createdAt": "1 month ago",
+      "mobile": "+529999012345",
+      "description":
+          "This Nintendo Switch system takes design inspiration from the new animal Crossing: new horizons game, with lovely pastel green and blue Joy-Con controllers that are white on the back, white wrist straps and a white Nintendo Switch dock.",
+      "images": [
+        "https://m.media-amazon.com/images/I/81Sxdp0JBLL._AC_SX679_.jpg",
+        "https://m.media-amazon.com/images/I/51WCwr6MW-L._AC_SX679_.jpg",
+        "https://m.media-amazon.com/images/I/51xTqVPBzuL._AC_SX679_.jpg",
+        "https://m.media-amazon.com/images/I/51KQle8PoSL._AC_SX679_.jpg",
+        "https://m.media-amazon.com/images/I/51tE5aqHDrL._AC_SX679_.jpg",
+        "https://m.media-amazon.com/images/I/61f7O-SjrlL._AC_SX679_.jpg"
+      ],
+    },
+    {
+      "id": "ad_07",
       "title": "Nendoroid Link BOTW",
       "price": 6600,
-      "createdBy": "Lucila",
+      "createdBy": "Karla",
       "createdAt": "3 days ago",
       "mobile": "+529999012345",
       "description":
@@ -16,26 +66,10 @@ class InformationMyAds {
       ],
     },
     {
-      "id": "ad_07",
-      "title": "Fire Emblem Figure Ike",
-      "price": 22000,
-      "createdBy": "Lucila",
-      "createdAt": "1 days ago",
-      "mobile": "+529999012345",
-      "description":
-          "Ike from 'Fire Emblem: Radiant Dawn' has been brought to life as a 1/7th scale figure.",
-      "images": [
-        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82412/large/43c2d9b2355eee58f535125545be90cf.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82410/large/f269696c0c91cffc708008fb1808e8e2.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82416/large/879c4d7c75da51c4b48c4a06cd715bf6.jpg",
-        "https://images.goodsmile.info/cgm/images/product/20210319/10946/82418/large/bd68fdd205a764e14334f5c39da44154.jpg",
-      ],
-    },
-    {
-      "id": "ad_08",
+      "id": "ad_09",
       "title": "figma Samus Aran: Zero Suit",
       "price": 6600,
-      "createdBy": "Lucila",
+      "createdBy": "Karla",
       "createdAt": "7 days ago",
       "mobile": "+529999012345",
       "description":
