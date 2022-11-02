@@ -1,16 +1,41 @@
-# practice_navigation
+# Classified App (UI) - AssignementAssignment
+A new Flutter project. Testing size in motorola E 6 plus using Vyzor.
 
-A new Flutter project.
+## Practice Navigation
+Karla Chable
 
-## Getting Started
+### Login Screen
+![LoginScreen](./screenshots/loginScreen.png)
 
-This project is a starting point for a Flutter application.
+### Register Screen
+![RegisterScreen](./screenshots/registerScreen.png)
 
-A few resources to get you started if this is your first Flutter project:
+### Home Screen
+![HomeScreen](./screenshots/homeScreen.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Settings Screen
+![SettingsScreen](./screenshots/settingsScreen.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Edit Profile Screen
+![EditProfileScreen](./screenshots/editProfileScreen.png)
+
+### My Ads Screen
+![MyAdsScreen](./screenshots/myAdsScreen.png)
+
+### Edit Ad Screen
+![EditAdScreen](./screenshots/editAdScreen.png)
+
+#### Edit Ad Screen modal
+![EditAdScreenModal](./screenshots/editAdScreenModal.png)
+
+### Register Screen
+![RegisterScreen](./screenshots/registerScreen.png)
+
+### Product Detail Screen
+![ProductDetailScreen](./screenshots/productDetailScreen.png)
+
+### Product Detail Screen Snack
+![ProductDetailScreenSnack](./screenshots/productDetailScreenSnack.png)
+
+### Image Viewer Screen
+![ImageViewerScreen](./screenshots/imageViewerScreen.png)

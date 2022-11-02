@@ -25,7 +25,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
         color: Colors.black,
         child: CarouselSlider.builder(
           options: CarouselOptions(
-            height: 250,
+            height: 540,
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 2),
           ),
