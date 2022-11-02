@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:practice_navigation/router_generator.dart';
 import 'package:practice_navigation/screens/HomeScreen.dart';
+import 'package:practice_navigation/styles/theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: CustomTheme().theme,
       home: SafeArea(child: HomeScreen()),
       initialRoute: '/login',
       onGenerateRoute: RouterGenerator().routerGenerate,
