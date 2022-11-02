@@ -1,4 +1,4 @@
-# Classified App (UI) - AssignementAssignment
+# Classified App (UI)
 A new Flutter project. Testing size in motorola E 6 plus using Vyzor.
 
 ## Practice Navigation
