@@ -53,6 +53,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
                                 ),
+                                prefixIcon: Icon(Icons.person,
+                                    color: Colors.grey.shade300),
                               )),
                           SizedBox(
                             height: 12,
@@ -73,6 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
                                 ),
+                                prefixIcon: Icon(Icons.email,
+                                    color: Colors.grey.shade300),
                               )),
                           SizedBox(
                             height: 12,
@@ -93,6 +97,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
                                 ),
+                                prefixIcon: Icon(Icons.phone,
+                                    color: Colors.grey.shade300),
                               )),
                           SizedBox(
                             height: 12,

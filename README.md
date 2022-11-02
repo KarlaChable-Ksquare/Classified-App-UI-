@@ -28,8 +28,8 @@ Karla Chable
 #### Edit Ad Screen modal
 ![EditAdScreenModal](./screenshots/editAdScreenModal.png)
 
-### Register Screen
-![RegisterScreen](./screenshots/registerScreen.png)
+### Create Ad Screen
+![CreateAdScreen](./screenshots/createAdScreen.png)
 
 ### Product Detail Screen
 ![ProductDetailScreen](./screenshots/productDetailScreen.png)
