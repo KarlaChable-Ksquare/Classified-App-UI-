@@ -6,5 +6,3 @@ class CustomTheme {
     textTheme: GoogleFonts.montserratTextTheme(),
   );
 }
-
-//appBarTheme: AppBarTheme(backgroundColor: Color.fromRGBO(242, 87, 35, 1))

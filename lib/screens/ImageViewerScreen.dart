@@ -13,7 +13,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Colors.black,
         child: const Icon(Icons.close),
         onPressed: () {
           Navigator.pop(context);
@@ -22,7 +22,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: Container(
         alignment: Alignment.center,
-        color: Color.fromARGB(255, 0, 0, 0),
+        color: Colors.black,
         child: CarouselSlider.builder(
           options: CarouselOptions(
             height: 250,
@@ -35,7 +35,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
                   Container(
             width: double.infinity,
             height: double.infinity,
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: Colors.black,
             child: Container(
               margin: EdgeInsets.all(15),
               child: Image.network(

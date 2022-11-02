@@ -131,7 +131,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color.fromRGBO(242, 87, 35, 1),
+                                  primary: Color(0xfff25723),
                                   shape: BeveledRectangleBorder(),
                                 ),
                                 onPressed: () {

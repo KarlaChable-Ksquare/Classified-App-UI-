@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/createad', arguments: {});
         },
-        backgroundColor: Color.fromRGBO(242, 87, 35, 1),
+        backgroundColor: Color(0xfff25723),
         elevation: 8,
         child: Icon(
           Icons.add_a_photo_outlined,

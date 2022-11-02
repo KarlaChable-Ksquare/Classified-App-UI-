@@ -64,8 +64,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                               GestureDetector(
                                 onTap: () {
                                   showModalBottomSheet(
-                                      backgroundColor:
-                                          Color.fromARGB(180, 242, 87, 35),
+                                      backgroundColor: Color(0xfff25723),
                                       context: context,
                                       builder: (context) {
                                         return Container(
@@ -112,7 +111,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 25, 20, 5),
+                margin: EdgeInsets.fromLTRB(20, 24, 20, 4),
                 child: Form(
                   //key: _formKey,
                   child: Column(
@@ -188,7 +187,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color.fromRGBO(242, 87, 35, 1),
+                                  primary: Color(0xfff25723),
                                   shape: BeveledRectangleBorder(),
                                 ),
                                 onPressed: () {

@@ -86,7 +86,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color.fromRGBO(242, 87, 35, 1),
+                                  primary: Color(0xfff25723),
                                   shape: BeveledRectangleBorder(),
                                 ),
                                 onPressed: () {
@@ -109,7 +109,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               },
                               child: Text("Logout",
                                   style: TextStyle(
-                                      color: Color.fromRGBO(242, 87, 35, 1),
+                                      color: Color(0xfff25723),
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold)))
                         ],

@@ -49,7 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Lucila Chable",
+                          Text("Karla Chable",
                               style: TextStyle(
                                 color: Colors.grey.shade800,
                                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                       child: Text("Edit",
                           style: TextStyle(
-                              color: Color.fromRGBO(242, 87, 35, 1),
+                              color: Color(0xfff25723),
                               fontWeight: FontWeight.bold))),
                 ],
               ),
@@ -90,8 +90,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     },
                     child: Text(
                       "My Ads",
-                      style: TextStyle(
-                          color: Color.fromRGBO(242, 87, 35, 1), fontSize: 16),
+                      style: TextStyle(color: Color(0xfff25723), fontSize: 16),
                     )),
               ],
             ),

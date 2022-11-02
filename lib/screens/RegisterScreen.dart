@@ -24,8 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(
                 height: 340,
                 width: double.infinity,
-                child: Image.network("https://i.ibb.co/PMDnM5V/merida.jpg",
-                    fit: BoxFit.cover),
+                child: Image.asset("images/merida.png", fit: BoxFit.cover),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(20, 30, 20, 5),
@@ -128,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color.fromRGBO(242, 87, 35, 1),
+                                  primary: Color(0xfff25723),
                                   shape: BeveledRectangleBorder(),
                                 ),
                                 onPressed: () {
