@@ -121,7 +121,7 @@ class InformationAds {
       "createdAt": "1 days ago",
       "mobile": "+529999012345",
       "description":
-          "From the Fire Emblem series comes the second figure in a new series of figures made by the developer of the series, INTELLIGENT SYSTEMS. Ike from 'Fire Emblem: Radiant Dawn' has been brought to life as a 1/7th scale figure.",
+          "Ike from 'Fire Emblem: Radiant Dawn' has been brought to life as a 1/7th scale figure.",
       "images": [
         "https://images.goodsmile.info/cgm/images/product/20210319/10946/82412/large/43c2d9b2355eee58f535125545be90cf.jpg",
         "https://images.goodsmile.info/cgm/images/product/20210319/10946/82410/large/f269696c0c91cffc708008fb1808e8e2.jpg",
@@ -137,7 +137,7 @@ class InformationAds {
       "createdAt": "7 days ago",
       "mobile": "+529999012345",
       "description":
-          "From the popular action game 'Metroid: Other M' comes a figma of the main character with her power suit removed - Samus Aran: Zero Suit ver.",
+          "From 'Metroid: Other M' comes a figma of the main character with her power suit removed - Samus Aran: Zero Suit ver.",
       "images": [
         "https://images.goodsmile.info/cgm/images/product/20160609/5730/39504/large/ee66dc00391e092afb8fb39f7e67b17a.jpg",
         "https://images.goodsmile.info/cgm/images/product/20160609/5730/39505/large/006db8acbf93ef962e0bf6a3b441736a.jpg",

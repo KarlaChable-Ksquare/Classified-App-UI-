@@ -37,25 +37,25 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                   ),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                height: 130,
-                width: 130,
+                height: 136,
+                width: 136,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.camera_alt_outlined,
-                      size: 50,
+                      Icons.add_a_photo_outlined,
+                      size: 40,
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 4,
                     ),
                     Text("Tap to upload")
                   ],
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 45, 20, 5),
+                margin: EdgeInsets.fromLTRB(20, 36, 20, 4),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -113,7 +113,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                           TextFormField(
                               controller: _descriptionCtrl,
                               keyboardType: TextInputType.text,
-                              maxLines: 5,
+                              maxLines: 4,
                               decoration: InputDecoration(
                                 labelText: "Description",
                                 labelStyle:
@@ -127,7 +127,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                             height: 20,
                           ),
                           SizedBox(
-                            height: 55,
+                            height: 56,
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -136,14 +136,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
-
-                                  // Navigator.pushNamed(context, '/editad',
-                                  //     arguments: {
-                                  //       'title': _titleCtrl,
-                                  //       'price': _priceCtrl,
-                                  //       'mobile': _mobileCtrl,
-                                  //       'description': _descriptionCtrl,
-                                  //     });
                                 },
                                 child: Text("Submit Ad",
                                     style: TextStyle(

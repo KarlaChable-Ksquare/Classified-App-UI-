@@ -8,11 +8,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  TextEditingController _nameCtrl = TextEditingController();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
-  var _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +20,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 15,
+                height: 16,
               ),
               CircleAvatar(
                 backgroundImage: AssetImage('images/miku_sakura.jpg'),
-                radius: 50,
+                radius: 48,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(20, 25, 20, 5),
+                margin: EdgeInsets.fromLTRB(20, 24, 20, 4),
                 child: Form(
-                  key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -44,7 +38,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         children: [
                           TextFormField(
                               initialValue: "Karla Chable",
-                              //controller: _nameCtrl,
                               keyboardType: TextInputType.name,
                               decoration: InputDecoration(
                                 labelText: "Full Name",
@@ -60,7 +53,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           TextFormField(
                               initialValue: "Karla.Chable@itksquare.edu.mx",
-                              //controller: _emailCtrl,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 labelText: "Email Address",
@@ -76,7 +68,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           TextFormField(
                               initialValue: "+529999012345",
-                              //controller: _mobileCtrl,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 labelText: "Mobile Number",
@@ -88,10 +79,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               )),
                           SizedBox(
-                            height: 25,
+                            height: 28,
                           ),
                           SizedBox(
-                            height: 55,
+                            height: 56,
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -100,13 +91,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
-                                  // if (_formKey.currentState!.validate()) {
-                                  //   Navigator.pushNamed(context, '/settings',
-                                  //       arguments: {
-                                  //         'name': _nameCtrl.text,
-                                  //         'mobile': _mobileCtrl.text,
-                                  //       });
-                                  // }
                                 },
                                 child: Text("Update Profile",
                                     style: TextStyle(
@@ -115,7 +99,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         fontWeight: FontWeight.bold))),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 24,
                           ),
                           TextButton(
                               onPressed: () {

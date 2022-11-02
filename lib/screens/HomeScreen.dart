@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                 child: CircleAvatar(
                   backgroundImage: AssetImage('images/miku_sakura.jpg'),
-                  radius: 15,
+                  radius: 16,
                 ),
               ))
         ],
@@ -33,12 +33,12 @@ class HomeScreen extends StatelessWidget {
         children: [
           Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
+              padding: EdgeInsets.fromLTRB(20, 16, 16, 16),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 5,
-                  childAspectRatio: 0.73),
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 0.72),
               itemCount: adsData.ads.length,
               itemBuilder: (context, index) {
                 return HomeScreenCard(
@@ -62,9 +62,9 @@ class HomeScreen extends StatelessWidget {
           Navigator.pushNamed(context, '/createad', arguments: {});
         },
         backgroundColor: Color.fromRGBO(242, 87, 35, 1),
-        elevation: 10,
+        elevation: 8,
         child: Icon(
-          Icons.camera_alt_outlined,
+          Icons.add_a_photo_outlined,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

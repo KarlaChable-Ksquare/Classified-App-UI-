@@ -56,66 +56,68 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${widget.data['title']}",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 28,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                        Container(
+                          height: 64,
+                          child: Text(
+                            "${widget.data['title']}",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 28,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 4,
                         ),
                         Text(
-                          "${widget.data['price']}",
+                          "\$ ${widget.data['price']}",
                           style: TextStyle(
                               fontSize: 16,
-                              color: Color.fromRGBO(242, 87, 35, 1),
+                              color: Color.fromRGBO(239, 152, 21, 1),
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 16,
                         ),
                         Container(
-                          color: Color.fromARGB(160, 242, 87, 35),
                           child: SizedBox(
-                            height: 215,
+                            height: 232,
                             width: double.infinity,
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(context, '/imageviewer',
                                     arguments: {
-                                      'imagesAll': widget.data['imagesAll']
+                                      'imagesAll': widget.data['imagesAll'],
                                     });
                               },
                               child: Image.network(
                                 "${widget.data['images']}",
-                                fit: BoxFit.fitHeight,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 16,
                         ),
                         Row(
                           children: [
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.people),
+                                  Icon(Icons.person_outline),
                                   Text("- All"),
                                 ],
                               ),
                             ),
                             SizedBox(
-                              width: 25,
+                              width: 24,
                             ),
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.lock_clock),
+                                  Icon(Icons.access_time),
                                   Text("- ${widget.data['createdAt']}")
                                 ],
                               ),
@@ -123,22 +125,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 12,
                         ),
                         SizedBox(
-                          //height: 70,
+                          height: 68,
                           width: double.infinity,
                           child: Text(
                             "${widget.data['description']}",
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black,
+                              height: 1.4,
                             ),
                             strutStyle: StrutStyle(),
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 24,
                         ),
                         SizedBox(
                           height: 55,

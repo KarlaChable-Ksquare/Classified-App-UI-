@@ -46,20 +46,18 @@ class MyAdsScreenCard extends StatelessWidget {
             color: Colors.grey.shade500,
             width: 1,
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(4),
         ),
-        margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
-        height: 110,
+        margin: EdgeInsets.fromLTRB(16, 8, 16, 0),
+        height: 112,
         child: Row(
           children: [
             Container(
               padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Container(
-                height: 95,
-                width: 115,
+                width: 96,
                 color: Colors.white,
-                child: Image.network(images,
-                    height: 95, width: 115, fit: BoxFit.fitHeight),
+                child: Image.network(images, fit: BoxFit.cover),
               ),
             ),
             Container(
@@ -75,17 +73,25 @@ class MyAdsScreenCard extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 3,
+                    height: 4,
                   ),
-                  Text(
-                    createdAt,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                    ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        size: 12,
+                      ),
+                      Text(
+                        createdAt,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 6,
+                    height: 8,
                   ),
                   Text(
                     '\$ ${price.toString()}',

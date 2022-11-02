@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 340, //450
+                height: 340,
                 width: double.infinity,
                 child: Image.network("https://i.ibb.co/PMDnM5V/merida.jpg",
                     fit: BoxFit.cover),
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 labelText: "Email Address",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.grey.shade300),
                               )),
                           SizedBox(
-                            height: 15,
+                            height: 12,
                           ),
                           TextFormField(
                               controller: _passwordCtrl,
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 20,
                           ),
                           SizedBox(
-                            height: 55,
+                            height: 56,
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         color: Colors.white, fontSize: 16))),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 12,
                           ),
                           TextButton(
                               onPressed: () {

@@ -32,8 +32,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   ),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                height: 130,
-                width: 130,
+                height: 136,
+                width: 136,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +53,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 height: 105,
                 width: double.infinity,
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(20, 25, 20, 0),
+                  margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: widget.data['imagesAll'].length,
@@ -69,36 +69,38 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                       context: context,
                                       builder: (context) {
                                         return Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: EdgeInsets.all(12),
                                           child: SizedBox(
                                             child: Image.network(
                                               "${widget.data['imagesAll'][index]}",
                                               fit: BoxFit.cover,
                                             ),
-                                            height: 550,
+                                            height: 548,
                                             width: double.infinity,
                                           ),
                                         );
                                       });
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
                                   height: 80,
-                                  width: 90,
+                                  width: 88,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
+                                    borderRadius: BorderRadius.circular(4),
                                     border: Border.all(
                                       color: Colors.grey.shade500,
                                       width: 1,
                                     ),
                                   ),
                                   child: Container(
-                                    margin: EdgeInsets.all(5),
+                                    //margin: EdgeInsets.all(4),
+                                    padding: EdgeInsets.all(4),
+                                    height: double.infinity,
+                                    width: double.infinity,
                                     child: Image.network(
                                       widget.data['imagesAll'][index],
-                                      height: 80,
-                                      width: 70,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
@@ -168,7 +170,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                           TextFormField(
                               initialValue: widget.data['description'],
                               keyboardType: TextInputType.text,
-                              maxLines: 5,
+                              maxLines: 4,
                               decoration: InputDecoration(
                                 labelText: "Description",
                                 labelStyle:
@@ -182,7 +184,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             height: 20,
                           ),
                           SizedBox(
-                            height: 55,
+                            height: 56,
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(

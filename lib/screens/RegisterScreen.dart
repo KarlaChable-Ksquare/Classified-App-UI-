@@ -22,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: 340, //450
+                height: 340,
                 width: double.infinity,
                 child: Image.network("https://i.ibb.co/PMDnM5V/merida.jpg",
                     fit: BoxFit.cover),
@@ -49,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               decoration: InputDecoration(
                                 labelText: "Full Name",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -69,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               decoration: InputDecoration(
                                 labelText: "Email Address",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               decoration: InputDecoration(
                                 labelText: "Mobile Number",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 labelStyle:
-                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                    TextStyle(fontSize: 16, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 1, color: Colors.grey),
@@ -124,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 12,
                           ),
                           SizedBox(
-                            height: 55,
+                            height: 56,
                             width: double.infinity,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -149,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         fontWeight: FontWeight.bold))),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 12,
                           ),
                           TextButton(
                               onPressed: () {

@@ -44,7 +44,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         radius: 24,
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 12,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
