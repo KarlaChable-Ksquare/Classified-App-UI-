@@ -116,6 +116,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                               maxLines: 4,
                               decoration: InputDecoration(
                                 labelText: "Description",
+                                alignLabelWithHint: true,
                                 labelStyle:
                                     TextStyle(fontSize: 14, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(

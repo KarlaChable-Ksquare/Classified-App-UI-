@@ -172,6 +172,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                               maxLines: 4,
                               decoration: InputDecoration(
                                 labelText: "Description",
+                                alignLabelWithHint: true,
                                 labelStyle:
                                     TextStyle(fontSize: 14, color: Colors.grey),
                                 enabledBorder: OutlineInputBorder(
