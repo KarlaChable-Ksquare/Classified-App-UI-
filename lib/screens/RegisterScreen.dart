@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/model/user.dart';
+import 'package:practice_navigation/services/auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -111,8 +113,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   if (value!.isEmpty) {
                                     return "This is required";
                                   }
-                                  if (value.length < 8) {
-                                    return "Password must be 8 chars";
+                                  if (value.length < 4) {
+                                    return "Password must be 4 chars";
                                   }
                                 },
                                 decoration: InputDecoration(
@@ -139,15 +141,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/',
-                                          arguments: {
-                                            "name": _nameCtrl.text,
-                                            'email': _emailCtrl.text,
-                                            'mobile':
-                                                int.parse(_mobileCtrl.text),
-                                            'password': _passwordCtrl.text
-                                          });
+                                      UserModel user = UserModel(
+                                          name: _nameCtrl.text,
+                                          email: _emailCtrl.text,
+                                          mobile: _mobileCtrl.text,
+                                          password: _passwordCtrl.text);
+                                      AuthService().register(user);
                                     }
                                   },
                                   child: Text("Register Now",

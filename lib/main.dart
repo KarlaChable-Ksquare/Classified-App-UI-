@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:practice_navigation/router_generator.dart';
+import 'package:practice_navigation/utils/router_generator.dart';
 import 'package:practice_navigation/screens/HomeScreen.dart';
 import 'package:practice_navigation/styles/theme.dart';
 

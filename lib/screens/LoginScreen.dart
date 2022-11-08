@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/model/user.dart';
+import 'package:practice_navigation/services/auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -8,8 +10,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _passwordCtrl = TextEditingController();
+  TextEditingController _emailCtrl =
+      TextEditingController(text: "karla@demo.com");
+  TextEditingController _passwordCtrl = TextEditingController(text: "464646");
   var _formKey = GlobalKey<FormState>();
 
   @override
@@ -65,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (value!.isEmpty) {
                                     return "This is required";
                                   }
-                                  if (value.length < 8) {
-                                    return "Password must be 8 chars";
+                                  if (value.length < 4) {
+                                    return "Password must be 4 chars";
                                   }
                                 },
                                 decoration: InputDecoration(
@@ -93,12 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/',
-                                          arguments: {
-                                            'email': _emailCtrl.text,
-                                            'password': _passwordCtrl.text,
-                                          });
+                                      UserModel user = UserModel(
+                                          email: _emailCtrl.text,
+                                          password: _passwordCtrl.text);
+                                      AuthService().login(context, user);
                                     }
                                   },
                                   child: Text("Login",
