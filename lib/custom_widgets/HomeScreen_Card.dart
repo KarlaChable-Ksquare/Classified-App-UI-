@@ -26,6 +26,14 @@ class HomeScreenCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String pictureRender() {
+      if (images.isEmpty) {
+        return "https://i.ibb.co/wN7ZCYb/gweenpool.jpg";
+      } else {
+        return images[0];
+      }
+    }
+
     return SizedBox(
       child: GestureDetector(
         onTap: () {
@@ -48,7 +56,7 @@ class HomeScreenCard extends StatelessWidget {
                 height: double.infinity, //400
                 width: double.infinity, //400
                 child: Image.network(
-                  images[0],
+                  pictureRender(),
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(

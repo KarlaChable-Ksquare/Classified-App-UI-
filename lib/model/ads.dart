@@ -26,7 +26,7 @@ class AdsModel {
     title = json['title'];
     description = json['description'];
     price = json['price'];
-    images = json['images'];
+    images = json['images'] ?? [];
     authorName = json['authorName'];
     userId = json['userId'];
     mobile = json['mobile'];
