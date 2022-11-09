@@ -23,7 +23,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       duration: Duration(seconds: 2),
       backgroundColor: Color.fromRGBO(242, 87, 35, 1),
-      content: Text("${widget.data['createdBy']}"),
+      content: Text("${widget.data['authorName']}"),
       action: SnackBarAction(
         label: "${widget.data['mobile']}",
         textColor: Colors.black,
@@ -36,6 +36,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String createAt = widget.data['createdAt'];
+
+    int calculateTime(String createAt) {
+      int currentYear = 2022;
+      int createAtYear = DateTime.parse(createAt).year;
+      int timeAgo = currentYear - createAtYear;
+      return timeAgo;
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -85,17 +94,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             height: 232,
                             width: double.infinity,
                             child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/imageviewer',
-                                    arguments: {
-                                      'imagesAll': widget.data['imagesAll'],
-                                    });
-                              },
-                              child: Image.network(
-                                "${widget.data['images']}",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/imageviewer',
+                                      arguments: {
+                                        'images': widget.data['images'],
+                                      });
+                                },
+                                child: FadeInImage(
+                                  placeholder: AssetImage('images/gween.jpg'),
+                                  image: NetworkImage(
+                                      "${widget.data['images'][0]}" ?? ""),
+                                  imageErrorBuilder:
+                                      (context, error, stackTrace) {
+                                    return Image.asset(
+                                      'images/gween.jpg',
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                                // child: Image.network(
+                                //   "${widget.data['images'][0]}",
+                                //   fit: BoxFit.cover,
+                                // ),
+                                ),
                           ),
                         ),
                         SizedBox(
@@ -118,7 +140,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               child: Row(
                                 children: [
                                   Icon(Icons.access_time),
-                                  Text("- ${widget.data['createdAt']}")
+                                  Text(
+                                      "-${calculateTime(createAt).toString()} - year ago")
+                                  //Text("-${DateTime.parse(widget.data['createdAt']).year}")
                                 ],
                               ),
                             ),

@@ -29,7 +29,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
             autoPlay: true,
             autoPlayInterval: const Duration(seconds: 2),
           ),
-          itemCount: widget.data['imagesAll'].length,
+          itemCount: widget.data['images'].length,
           itemBuilder:
               (BuildContext context, int itemIndex, int pageViewIndex) =>
                   Container(
@@ -39,7 +39,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
             child: Container(
               margin: EdgeInsets.all(15),
               child: Image.network(
-                widget.data['imagesAll'][itemIndex],
+                widget.data['images'][itemIndex],
                 fit: BoxFit.fitHeight,
               ),
             ),

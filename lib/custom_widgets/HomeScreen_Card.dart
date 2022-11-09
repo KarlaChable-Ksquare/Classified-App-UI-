@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class HomeScreenCard extends StatelessWidget {
-  String id;
+  //String id;
   String title;
-  int price;
-  String createdBy;
-  String createdAt;
-  String mobile;
   String description;
-  String images;
-  List<String> imagesAll;
+  int price;
+  List<dynamic> images;
+  String authorName;
+  String userId;
+  String mobile;
+  String createdAt;
 
   HomeScreenCard({
     super.key,
-    required this.id,
+    //required this.id,
     required this.title,
-    required this.price,
-    required this.createdBy,
-    required this.createdAt,
-    required this.mobile,
     required this.description,
+    required this.price,
     required this.images,
-    required this.imagesAll,
+    required this.authorName,
+    required this.userId,
+    required this.mobile,
+    required this.createdAt,
   });
 
   @override
@@ -30,15 +30,14 @@ class HomeScreenCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/productdetail', arguments: {
-            'id': id,
+            //'id': id,
             'title': title,
             "price": price.toString(),
-            'createdBy': createdBy,
+            'authorName': authorName,
             'createdAt': createdAt,
             'mobile': mobile,
             'description': description,
             'images': images,
-            'imagesAll': imagesAll,
           });
         },
         child: Container(
@@ -46,9 +45,22 @@ class HomeScreenCard extends StatelessWidget {
             children: [
               Container(
                 color: Colors.white,
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.network(images, fit: BoxFit.cover),
+                height: double.infinity, //400
+                width: double.infinity, //400
+                child: Image.network(
+                  images[0],
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Color(0xfff25723),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Whoops!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    );
+                  },
+                ),
               ),
               Container(
                 child: Align(
@@ -75,7 +87,7 @@ class HomeScreenCard extends StatelessWidget {
                           SizedBox(
                             height: 4,
                           ),
-                          Text('\$ ${price.toString()}',
+                          Text('\$ ${price.toString()}', //.toString()
                               style: TextStyle(
                                   color: Color.fromRGBO(233, 167, 81, 1),
                                   fontSize: 16,

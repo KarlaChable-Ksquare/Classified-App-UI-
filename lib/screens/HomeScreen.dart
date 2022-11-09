@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
 import 'package:practice_navigation/data/ads.dart';
+import 'package:practice_navigation/model/ads.dart';
+import 'package:practice_navigation/services/ads.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
   });
-  final adsData = InformationAds();
+  //final adsData = InformationAds();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,45 @@ class HomeScreen extends StatelessWidget {
           child: Column(
         children: [
           Expanded(
-            child: GridView.builder(
+            child: FutureBuilder(
+              future: GetAllAds().fetchUserData(),
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  List<AdsModel> ads = snapshot.data!;
+                  return GridView.builder(
+                    padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 0.72),
+                    itemCount: ads.length,
+                    itemBuilder: (((context, index) {
+                      return HomeScreenCard(
+                        //id: ads[index].id!,
+                        title: ads[index].title!,
+                        description: ads[index].description!,
+                        price: ads[index].price!,
+                        images: ads[index].images!,
+                        authorName: ads[index].authorName!,
+                        userId: ads[index].userId!,
+                        mobile: ads[index].mobile!,
+                        createdAt: ads[index].createdAt!,
+                      );
+                    })),
+                  );
+                }
+                //
+                if (snapshot.hasError) {
+                  return const Center(child: Text("Something went wrong"));
+                }
+                return const Center(
+                    child: CircularProgressIndicator(
+                        backgroundColor: Colors.black,
+                        color: Color(0xfff25723)));
+              }),
+            ),
+            /*child: GridView.builder(
               padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -55,9 +95,12 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
+            */
           ),
         ],
-      )),
+      ))
+      //
+      ,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/createad', arguments: {});
