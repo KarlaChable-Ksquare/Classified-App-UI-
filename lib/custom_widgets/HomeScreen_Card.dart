@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HomeScreenCard extends StatelessWidget {
-  //String id;
+  String id;
   String title;
   String description;
   int price;
-  List<dynamic> images;
+  List<String> images;
   String authorName;
   String userId;
   String mobile;
@@ -13,7 +13,7 @@ class HomeScreenCard extends StatelessWidget {
 
   HomeScreenCard({
     super.key,
-    //required this.id,
+    required this.id,
     required this.title,
     required this.description,
     required this.price,
@@ -59,13 +59,9 @@ class HomeScreenCard extends StatelessWidget {
                   pictureRender(),
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Color(0xfff25723),
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'Whoops!',
-                        style: TextStyle(fontSize: 30),
-                      ),
+                    return Image.network(
+                      "https://i.ibb.co/CbJyRbH/Lilie.jpg",
+                      fit: BoxFit.cover,
                     );
                   },
                 ),

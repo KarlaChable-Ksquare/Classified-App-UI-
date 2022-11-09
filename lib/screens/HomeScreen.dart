@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: ads.length,
                     itemBuilder: (((context, index) {
                       return HomeScreenCard(
-                        //id: ads[index].id!,
+                        id: ads[index].id!,
                         title: ads[index].title!,
                         description: ads[index].description!,
                         price: ads[index].price!,

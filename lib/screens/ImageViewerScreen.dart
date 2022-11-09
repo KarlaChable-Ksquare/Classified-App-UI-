@@ -11,6 +11,14 @@ class ImageViewerScreen extends StatefulWidget {
 class _ImageViewerScreenState extends State<ImageViewerScreen> {
   @override
   Widget build(BuildContext context) {
+    String pictureRender() {
+      if (widget.data['images'].isEmpty) {
+        return "https://i.ibb.co/wN7ZCYb/gweenpool.jpg";
+      } else {
+        return widget.data['images'];
+      }
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
@@ -40,8 +48,15 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
               margin: EdgeInsets.all(15),
               child: Image.network(
                 widget.data['images'][itemIndex],
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.network(
+                    "https://i.ibb.co/CbJyRbH/Lilie.jpg",
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
+              //widget.data['images'][itemIndex],
             ),
           ),
         ),
