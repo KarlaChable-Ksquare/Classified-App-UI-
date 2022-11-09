@@ -38,10 +38,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     String createAt = widget.data['createdAt'];
     int calculateTime(String createAt) {
-      int currentYear = 2022;
-      int createAtYear = DateTime.parse(createAt).year;
-      int timeAgo = currentYear - createAtYear;
-      return timeAgo;
+      final currentDate = DateTime.now();
+      final createAtDate = DateTime.parse(createAt);
+      final diff = currentDate.difference(createAtDate);
+      return diff.inDays;
     }
 
     String pictureRender() {
@@ -155,7 +155,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 children: [
                                   Icon(Icons.access_time),
                                   Text(
-                                      "-${calculateTime(createAt).toString()} - year ago")
+                                      "-${calculateTime(createAt).toString()} - Days ago")
                                   //Text("-${DateTime.parse(widget.data['createdAt']).year}")
                                 ],
                               ),

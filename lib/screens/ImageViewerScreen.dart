@@ -11,14 +11,6 @@ class ImageViewerScreen extends StatefulWidget {
 class _ImageViewerScreenState extends State<ImageViewerScreen> {
   @override
   Widget build(BuildContext context) {
-    String pictureRender() {
-      if (widget.data['images'].isEmpty) {
-        return "https://i.ibb.co/wN7ZCYb/gweenpool.jpg";
-      } else {
-        return widget.data['images'];
-      }
-    }
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
@@ -56,7 +48,6 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
                   );
                 },
               ),
-              //widget.data['images'][itemIndex],
             ),
           ),
         ),
