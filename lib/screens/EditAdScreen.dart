@@ -56,7 +56,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: widget.data['imagesAll'].length,
+                      itemCount: widget.data['images'].length,
                       itemBuilder: ((context, index) {
                         return Container(
                           child: Row(
@@ -71,7 +71,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                           padding: EdgeInsets.all(12),
                                           child: SizedBox(
                                             child: Image.network(
-                                              "${widget.data['imagesAll'][index]}",
+                                              "${widget.data['images'][index]}",
                                               fit: BoxFit.cover,
                                             ),
                                             height: 548,
@@ -98,7 +98,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                     height: double.infinity,
                                     width: double.infinity,
                                     child: Image.network(
-                                      widget.data['imagesAll'][index],
+                                      widget.data['images'][index],
                                       fit: BoxFit.cover,
                                     ),
                                   ),

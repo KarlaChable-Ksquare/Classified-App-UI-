@@ -24,7 +24,7 @@ class GetAllAds {
   Future<List<AdsModel>> fetchMyPosts() async {
     var storage = FlutterSecureStorage();
     List<AdsModel> ads = [];
-    var url = Uri.parse("${Constants().serverUrl}/ads/me");
+    var url = Uri.parse("${Constants().serverUrl}/ads/user");
     var token = await storage.read(key: 'token');
     //try {
     var res = await http.post(url, headers: {

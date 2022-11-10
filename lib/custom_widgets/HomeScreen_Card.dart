@@ -38,7 +38,7 @@ class HomeScreenCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/productdetail', arguments: {
-            //'id': id,
+            'id': id,
             'title': title,
             "price": price.toString(),
             'authorName': authorName,

@@ -6,6 +6,7 @@ import 'package:practice_navigation/services/ads.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
+    dynamic user,
     super.key,
   });
   //final adsData = InformationAds();
@@ -50,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: ads.length,
                     itemBuilder: (((context, index) {
                       return HomeScreenCard(
-                        id: ads[index].id!,
+                        id: ads[index].sId!,
                         title: ads[index].title!,
                         description: ads[index].description!,
                         price: ads[index].price!,

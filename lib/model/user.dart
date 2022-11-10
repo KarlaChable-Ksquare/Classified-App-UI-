@@ -1,24 +1,43 @@
+// ignore_for_file: unnecessary_this
+
 class UserModel {
+  String? sId;
   String? name;
   String? email;
-  String? password;
   String? mobile;
+  String? imgURL;
+  String? date;
+  String? password;
 
-  UserModel({this.name, this.email, this.password, this.mobile});
+  UserModel({
+    this.sId,
+    this.name,
+    this.email,
+    this.mobile,
+    this.imgURL,
+    this.date,
+    this.password,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
     name = json['name'];
     email = json['email'];
-    password = json['password'];
     mobile = json['mobile'];
+    imgURL = json['imgURL'];
+    date = json['date'];
+    password = json['password'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['mobile'] = this.mobile;
-    data['password'] = this.password;
-    return data;
+    final Map<String, dynamic> user = Map<String, dynamic>();
+    user['_id'] = this.sId;
+    user['name'] = this.name;
+    user['email'] = this.email;
+    user['mobile'] = this.mobile;
+    user['imgURL'] = this.imgURL;
+    user['date'] = this.date;
+    user['password'] = this.password;
+    return user;
   }
 }

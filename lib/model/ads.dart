@@ -1,5 +1,5 @@
 class AdsModel {
-  String? id;
+  String? sId;
   String? title;
   String? description;
   int? price;
@@ -10,7 +10,7 @@ class AdsModel {
   String? createdAt;
 
   AdsModel(
-      {this.id,
+      {this.sId,
       this.title,
       this.description,
       this.price,
@@ -21,7 +21,7 @@ class AdsModel {
       this.createdAt});
 
   AdsModel.fromJson(Map<String, dynamic> json) {
-    id = json['_id'] ?? '';
+    sId = json['_id'] ?? '';
     title = json['title'] ?? '';
     description = json['description'] ?? '';
     price = json['price'] ?? '';
@@ -35,7 +35,7 @@ class AdsModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['_id'] = id;
+    data['_id'] = sId;
     data['title'] = title;
     data['description'] = description;
     data['price'] = price;
