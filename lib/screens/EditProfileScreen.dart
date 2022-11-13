@@ -79,11 +79,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: _imagePath.isNotEmpty
                         ? CircleAvatar(
                             radius: 48,
-                            child: Image.file(
+                            backgroundImage: FileImage(
                               File(_imagePath),
-                              height: 100,
-                              width: 100,
-                              fit: BoxFit.cover,
                             ),
                           )
                         : CircleAvatar(
