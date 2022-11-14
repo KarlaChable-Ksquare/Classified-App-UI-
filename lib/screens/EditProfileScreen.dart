@@ -39,7 +39,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   _upload(filePath) async {
-    //"${Constants().serverUrl}/upload/profile"
     var url = Uri.parse("${Constants().serverUrl}/upload/profile");
     var request = http.MultipartRequest('POST', url);
     MultipartFile image = await http.MultipartFile.fromPath('avatar', filePath);
