@@ -27,7 +27,7 @@ class GetAllAds {
     List<AdsModel> ads = [];
     var resp = await MyAdsProvider().post('/ads/user', {});
     var postData = resp['data'];
-    ads = postData.map<AdsModel>((post) => AdsModel.fromJson(post)).toList();
+    ads = postData.map<AdsModel>((ad) => AdsModel.fromJson(ad)).toList();
     return ads;
     /*
     var url = Uri.parse("${Constants().serverUrl}/ads/user");
@@ -54,5 +54,15 @@ class GetAllAds {
     return ads;
     }
     */
+  }
+
+  void createPost(AdsModel ad) async {
+    var resp = await MyAdsProvider().post('/ads', ad.toJson());
+    print(resp['data']);
+  }
+
+  void patchPost(AdsModel ad) async {
+    var resp = await MyAdsProvider().patch('/ads/:id', ad.toJson());
+    print(resp['data']);
   }
 }

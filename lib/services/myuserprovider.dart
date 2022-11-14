@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:http/http.dart' as http;
 
-class MyAdsProvider {
+class MyUserProvider {
   var storage = FlutterSecureStorage();
 
   Future<String> _getToken() async {
@@ -18,36 +18,16 @@ class MyAdsProvider {
     };
   }
 
-  Future post(endpoint, body) async {
-    var responseJson;
-    var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
-    //print(requestURL);
-    //print(_getHeaders());
-    try {
-      var responce = await http.post(
-        requestURL,
-        headers: await _getHeaders(),
-        body: jsonEncode(body),
-      );
-      responseJson = _handleResponse(responce);
-    } catch (e) {
-      print("error");
-      print(e);
-    }
-    print(responseJson);
-    return responseJson;
-  }
-
   Future patch(endpoint, body) async {
     var responseJson;
     var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
     try {
-      var responce = await http.patch(
+      var response = await http.patch(
         requestURL,
         headers: await _getHeaders(),
         body: jsonEncode(body),
       );
-      responseJson = _handleResponse(responce);
+      responseJson = _handleResponse(response);
     } catch (e) {
       print("error");
       print(e);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/model/ads.dart';
+import 'package:practice_navigation/services/ads.dart';
 
 class EditAdScreen extends StatefulWidget {
   dynamic data;
@@ -9,8 +11,17 @@ class EditAdScreen extends StatefulWidget {
 }
 
 class _EditAdScreenState extends State<EditAdScreen> {
+  TextEditingController _titleCtrl = TextEditingController();
+  TextEditingController _priceCtrl = TextEditingController();
+  TextEditingController _mobileCtrl = TextEditingController();
+  TextEditingController _descriptionCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _titleCtrl.text = widget.data['title'];
+    _priceCtrl.text = widget.data['price'].toString();
+    _mobileCtrl.text = widget.data['mobile'];
+    _descriptionCtrl.text = widget.data['description'];
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -122,8 +133,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            TextFormField(
-                                initialValue: widget.data['title'],
+                            TextField(
+                                controller: _titleCtrl,
                                 keyboardType: TextInputType.name,
                                 decoration: InputDecoration(
                                   labelText: "Title",
@@ -137,8 +148,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             SizedBox(
                               height: 12,
                             ),
-                            TextFormField(
-                                initialValue: widget.data['price'].toString(),
+                            TextField(
+                                controller: _priceCtrl,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   labelText: "Price",
@@ -152,8 +163,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             SizedBox(
                               height: 12,
                             ),
-                            TextFormField(
-                                initialValue: widget.data['mobile'],
+                            TextField(
+                                controller: _mobileCtrl,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   labelText: "Contact Number",
@@ -167,8 +178,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             SizedBox(
                               height: 12,
                             ),
-                            TextFormField(
-                                initialValue: widget.data['description'],
+                            TextField(
+                                controller: _descriptionCtrl,
                                 keyboardType: TextInputType.text,
                                 maxLines: 4,
                                 decoration: InputDecoration(
@@ -193,7 +204,22 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                     shape: BeveledRectangleBorder(),
                                   ),
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    var ad = AdsModel(
+                                      sId: widget.data['id'],
+                                      title: _titleCtrl.text,
+                                      mobile: _mobileCtrl.text,
+                                      price: int.parse(_priceCtrl.text),
+                                      description: _descriptionCtrl.text,
+                                      images: [
+                                        "https://i.ibb.co/9WQp2G3/Whats-App-Image-2022-09-15-at-11-58-24-AM.jpg"
+                                      ],
+                                    );
+                                    GetAllAds().patchPost(ad);
+                                    //Navigator.pop(context);
+                                    Navigator.pushReplacementNamed(
+                                      context,
+                                      '/',
+                                    );
                                   },
                                   child: Text("Submit Ad",
                                       style: TextStyle(

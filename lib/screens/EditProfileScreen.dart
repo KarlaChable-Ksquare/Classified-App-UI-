@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:practice_navigation/utils/contants.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -11,6 +15,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   String _imagePath = '';
+  String _imageServerPath = '';
   void captureImageFromGallery() async {
     var file = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file != null) {
@@ -18,6 +23,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _imagePath = file.path;
       });
+      _upload(file.path);
     }
   }
 
@@ -28,7 +34,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _imagePath = file.path;
       });
+      _upload(file.path);
     }
+  }
+
+  _upload(filePath) async {
+    //"${Constants().serverUrl}/upload/profile"
+    var url = Uri.parse("${Constants().serverUrl}/upload/profile");
+    var request = http.MultipartRequest('POST', url);
+    MultipartFile image = await http.MultipartFile.fromPath('avatar', filePath);
+    request.files.add(image);
+    var response = await request.send();
+    var resp = await response.stream.bytesToString();
+    print(resp);
+    var respJson = jsonDecode(resp);
+    setState(() {
+      _imageServerPath = respJson['data']['path'];
+    });
   }
 
   @override
@@ -77,10 +99,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: CircleAvatar(
                     radius: 48,
                     child: _imagePath.isNotEmpty
+                        //_imageServerPath.isNotEmpty
                         ? CircleAvatar(
                             radius: 48,
                             backgroundImage: FileImage(
-                              File(_imagePath),
+                              File(/*_imageServerPath*/ _imagePath),
                             ),
                           )
                         : CircleAvatar(
