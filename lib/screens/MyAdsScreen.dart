@@ -6,7 +6,6 @@ import 'package:practice_navigation/services/ads.dart';
 
 class MyAdsScreen extends StatelessWidget {
   MyAdsScreen({super.key});
-  //final adsData = InformationMyAds();
 
   @override
   Widget build(BuildContext context) {

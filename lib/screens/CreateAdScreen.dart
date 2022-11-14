@@ -9,7 +9,11 @@ import 'package:practice_navigation/utils/contants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateAdScreen extends StatefulWidget {
-  const CreateAdScreen({super.key});
+  //dynamic data;
+  CreateAdScreen({
+    super.key,
+    /*required this.data*/
+  });
 
   @override
   State<CreateAdScreen> createState() => _CreateAdScreenState();
@@ -62,6 +66,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //var authorName = widget.data['authorName'];
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(

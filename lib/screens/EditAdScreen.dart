@@ -17,6 +17,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
   TextEditingController _descriptionCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var authorName = widget.data['authorName'];
     _titleCtrl.text = widget.data['title'];
     _priceCtrl.text = widget.data['price'].toString();
     _mobileCtrl.text = widget.data['mobile'];
@@ -206,6 +207,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   onPressed: () {
                                     var ad = AdsModel(
                                       sId: widget.data['id'],
+                                      authorName: authorName,
                                       title: _titleCtrl.text,
                                       mobile: _mobileCtrl.text,
                                       price: int.parse(_priceCtrl.text),

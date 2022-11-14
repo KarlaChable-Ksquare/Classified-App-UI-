@@ -62,7 +62,7 @@ class GetAllAds {
   }
 
   void patchPost(AdsModel ad) async {
-    var resp = await MyAdsProvider().patch('/ads/:id', ad.toJson());
+    var resp = await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson());
     print(resp['data']);
   }
 }

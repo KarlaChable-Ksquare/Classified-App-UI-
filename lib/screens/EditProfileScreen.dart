@@ -7,13 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:practice_navigation/utils/contants.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  dynamic data;
+  EditProfileScreen({super.key, required this.data});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  TextEditingController _authorNameCtrl = TextEditingController();
+  TextEditingController _emailCtrl = TextEditingController();
+  TextEditingController _mobileCtrl = TextEditingController();
+
   String _imagePath = '';
   String _imageServerPath = '';
   void captureImageFromGallery() async {
@@ -33,6 +38,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       print(file.path);
       setState(() {
         _imagePath = file.path;
+        print(_imageServerPath);
       });
       _upload(file.path);
     }
@@ -49,11 +55,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     var respJson = jsonDecode(resp);
     setState(() {
       _imageServerPath = respJson['data']['path'];
+      print(_imageServerPath);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _authorNameCtrl.text = "Karla";
+    _emailCtrl.text = 'karla@demo.com';
+    _mobileCtrl.text = '+529991698657';
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -98,11 +108,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   child: CircleAvatar(
                     radius: 48,
                     child: _imagePath.isNotEmpty
-                        //_imageServerPath.isNotEmpty
                         ? CircleAvatar(
                             radius: 48,
                             backgroundImage: FileImage(
-                              File(/*_imageServerPath*/ _imagePath),
+                              File(_imagePath),
                             ),
                           )
                         : CircleAvatar(
@@ -123,8 +132,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            TextFormField(
-                                initialValue: "Karla Chable",
+                            TextField(
+                                controller: _authorNameCtrl,
                                 keyboardType: TextInputType.name,
                                 decoration: InputDecoration(
                                   labelText: "Full Name",
@@ -138,8 +147,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             SizedBox(
                               height: 12,
                             ),
-                            TextFormField(
-                                initialValue: "Karla.Chable@itksquare.edu.mx",
+                            TextField(
+                                controller: _emailCtrl,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   labelText: "Email Address",
@@ -153,8 +162,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             SizedBox(
                               height: 12,
                             ),
-                            TextFormField(
-                                initialValue: "+529999012345",
+                            TextField(
+                                controller: _mobileCtrl,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   labelText: "Mobile Number",

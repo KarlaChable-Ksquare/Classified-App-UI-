@@ -24,12 +24,12 @@ class MyAdsProvider {
     //print(requestURL);
     //print(_getHeaders());
     try {
-      var responce = await http.post(
+      var response = await http.post(
         requestURL,
         headers: await _getHeaders(),
         body: jsonEncode(body),
       );
-      responseJson = _handleResponse(responce);
+      responseJson = _handleResponse(response);
     } catch (e) {
       print("error");
       print(e);
@@ -42,12 +42,12 @@ class MyAdsProvider {
     var responseJson;
     var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
     try {
-      var responce = await http.patch(
+      var response = await http.patch(
         requestURL,
         headers: await _getHeaders(),
         body: jsonEncode(body),
       );
-      responseJson = _handleResponse(responce);
+      responseJson = _handleResponse(response);
     } catch (e) {
       print("error");
       print(e);

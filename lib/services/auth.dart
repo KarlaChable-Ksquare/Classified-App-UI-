@@ -31,7 +31,7 @@ class AuthService {
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
       var respObj = jsonDecode(resp.body);
-      //print(respObj);
+      print(respObj);
       if (respObj['status'] == false) {
         AlertManager().displaySnackbar(context, respObj['message']);
       }
