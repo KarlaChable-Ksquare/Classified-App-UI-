@@ -106,7 +106,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                       ),
                                     ),
                                     child: Container(
-                                      //margin: EdgeInsets.all(4),
                                       padding: EdgeInsets.all(4),
                                       height: double.infinity,
                                       width: double.infinity,

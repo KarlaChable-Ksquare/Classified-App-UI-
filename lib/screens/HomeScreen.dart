@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
-import 'package:practice_navigation/data/ads.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
+import 'package:practice_navigation/services/myuser.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
-    dynamic user,
     super.key,
   });
-  //final adsData = InformationAds();
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +21,27 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, '/settings', arguments: {});
               },
-              child: Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('images/miku_sakura.jpg'),
-                  radius: 16,
-                ),
+              child: FutureBuilder(
+                future: MyUserService().myUserPost(),
+                builder: (((context, snapshot) {
+                  if (snapshot.hasData) {
+                    Map userData = snapshot.data!;
+                    return CircleAvatar(
+                      backgroundImage: NetworkImage(userData['imgURL']),
+                      radius: 16,
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text("Something wrong"),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                        backgroundColor: Colors.black,
+                        color: Color(0xfff25723)),
+                  );
+                })),
               ))
         ],
       ),

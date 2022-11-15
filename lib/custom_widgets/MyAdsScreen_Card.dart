@@ -45,7 +45,6 @@ class MyAdsScreenCard extends StatelessWidget {
           'mobile': mobile,
           'description': description,
           'images': images,
-          //'imagesAll': imagesAll,
         });
       },
       child: Column(

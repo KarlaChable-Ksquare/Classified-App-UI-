@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/services/myuser.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingScreen extends StatefulWidget {
-  dynamic data;
-  SettingScreen({super.key, required this.data});
+  //dynamic data;
+  SettingScreen({
+    super.key,
+    /*required this.data*/
+  });
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -32,51 +36,74 @@ class _SettingScreenState extends State<SettingScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 4, 24, 28),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('images/miku_sakura.jpg'),
-                        radius: 24,
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            FutureBuilder(
+                future: MyUserService().myUserPost(),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    Map userData = snapshot.data!;
+                    return Container(
+                      padding: EdgeInsets.fromLTRB(0, 4, 24, 28),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Karla Chable",
-                              style: TextStyle(
-                                color: Colors.grey.shade800,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          SizedBox(
-                            height: 4,
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(userData['imgURL']),
+                                radius: 24,
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(userData['name'],
+                                      style: TextStyle(
+                                        color: Colors.grey.shade800,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(userData['mobile'],
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                ],
+                              )
+                            ],
                           ),
-                          Text("+529999012345",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
-                              )),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/editprofile',
+                                    arguments: {
+                                      'name': userData['name'],
+                                      'email': userData['email'],
+                                      'mobile': userData['mobile'],
+                                      'imgURL': userData['imgURL'],
+                                    });
+                              },
+                              child: Text("Edit",
+                                  style: TextStyle(
+                                      color: Color(0xfff25723),
+                                      fontWeight: FontWeight.bold))),
                         ],
-                      )
-                    ],
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/editprofile');
-                      },
-                      child: Text("Edit",
-                          style: TextStyle(
-                              color: Color(0xfff25723),
-                              fontWeight: FontWeight.bold))),
-                ],
-              ),
-            ),
+                      ),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    print(snapshot.hasError);
+                    return const Center(
+                        child: Text("Something went wrong :( "));
+                  }
+                  return const Center(
+                      child: CircularProgressIndicator(
+                          backgroundColor: Colors.black,
+                          color: Color(0xfff25723)));
+                })),
             Row(
               children: [
                 Icon(
