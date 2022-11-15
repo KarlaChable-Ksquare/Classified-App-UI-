@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:practice_navigation/model/user.dart';
+import 'package:practice_navigation/services/myuserprovider.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AuthService {
   void register(UserModel user) async {
     var url = Uri.parse("${Constants().serverUrl}/auth/register");
-    print(url);
+    //print(url);
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
-      //print(resp.body);
+      print(resp.body);
     } catch (e) {
       print(e);
     }
@@ -24,7 +25,8 @@ class AuthService {
   void login(context, UserModel user) async {
     var storage = FlutterSecureStorage();
     var url = Uri.parse("${Constants().serverUrl}/auth/login");
-    print(url);
+    //print(url);
+    print('login exitoso');
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,
@@ -75,5 +77,17 @@ class AuthService {
       print("");
       return false;
     }
+  }
+
+  Future<UserModel> myUserData() async {
+    var storage = FlutterSecureStorage();
+    UserModel userData;
+    var resp = await MyUserProvider().postUser('/user/profile', {});
+    var userPostData = resp['data'];
+    print(userPostData);
+    userData = userPostData
+        .map<UserModel>((data) => UserModel.fromJson(data))
+        .toList();
+    return userData;
   }
 }

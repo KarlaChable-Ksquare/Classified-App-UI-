@@ -38,7 +38,7 @@ class RouterGenerator {
         return MaterialPageRoute(
             builder: (context) => SafeArea(
                     child: EditProfileScreen(
-                  data: args,
+                  userData: args,
                 )));
 
       case '/myads':
