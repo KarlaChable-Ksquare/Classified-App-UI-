@@ -14,7 +14,7 @@ class AuthService {
       var resp = await http.post(url,
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
-      print(resp.body);
+      //print(resp.body);
     } catch (e) {
       print(e);
     }
@@ -30,7 +30,7 @@ class AuthService {
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
       var respObj = jsonDecode(resp.body);
-      print(respObj);
+      //print(respObj);
       if (respObj['status'] == false) {
         AlertManager().displaySnackbar(context, respObj['message']);
       }

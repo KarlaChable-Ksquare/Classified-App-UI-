@@ -3,10 +3,8 @@ import 'package:practice_navigation/services/myuser.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingScreen extends StatefulWidget {
-  //dynamic data;
   SettingScreen({
     super.key,
-    /*required this.data*/
   });
 
   @override

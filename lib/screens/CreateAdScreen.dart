@@ -9,10 +9,8 @@ import 'package:practice_navigation/utils/contants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateAdScreen extends StatefulWidget {
-  //dynamic data;
   CreateAdScreen({
     super.key,
-    /*required this.data*/
   });
 
   @override
@@ -24,49 +22,40 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
   TextEditingController _priceCtrl = TextEditingController();
   TextEditingController _mobileCtrl = TextEditingController();
   TextEditingController _descriptionCtrl = TextEditingController();
-  //var _formKey = GlobalKey<FormState>();
 
-  String _imagePath = '';
-  String _imageServerPath = '';
+  List<dynamic> _imagePath = [];
+  List<dynamic> _imageServer = [];
+  List<String> _imageServerPath = [];
+
   void captureImageFromGallery() async {
-    var file = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (file != null) {
-      print(file.path);
-      setState(() {
-        _imagePath = file.path;
-      });
-      _upload(file.path);
+    var files = await ImagePicker().pickMultiImage();
+    if (files.isNotEmpty) {
+      _uploadMultitpleFiles(files);
     }
   }
 
-  void captureImageFromCamera() async {
-    var file = await ImagePicker().pickImage(source: ImageSource.camera);
-    if (file != null) {
-      print(file.path);
-      setState(() {
-        _imagePath = file.path;
-      });
-      _upload(file.path);
-    }
-  }
-
-  _upload(filePath) async {
+  _uploadMultitpleFiles(List<XFile> files) async {
     var url = Uri.parse("${Constants().serverUrl}/upload/photos");
     var request = http.MultipartRequest('POST', url);
-    MultipartFile image = await http.MultipartFile.fromPath('photos', filePath);
-    request.files.add(image);
+    files.forEach((file) async {
+      MultipartFile images =
+          await http.MultipartFile.fromPath('photos', file.path);
+      request.files.add(images);
+    });
     var response = await request.send();
     var resp = await response.stream.bytesToString();
     print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
-      _imageServerPath = respJson['data']['path'];
+      _imageServer = respJson['data']['path'];
+      List<String> _imageServerPath =
+          _imageServer.map((str) => str.toString()).toList();
+      print(_imageServerPath);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    //var authorName = widget.data['authorName'];
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -98,12 +87,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                     },
                                     child: Text("Capture Gallery",
                                         style: TextStyle(color: Colors.white))),
-                                TextButton(
-                                    onPressed: () {
-                                      captureImageFromCamera();
-                                    },
-                                    child: Text("Capture  Camera",
-                                        style: TextStyle(color: Colors.white)))
                               ],
                             ),
                           );
@@ -120,9 +103,8 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                     height: 136,
                     width: 136,
                     child: _imagePath.isNotEmpty
-                        //_imageServerPath.isNotEmpty
                         ? Image.file(
-                            File(_imagePath),
+                            File(_imagePath[0]),
                             height: 136,
                             width: 136,
                             fit: BoxFit.cover,
@@ -146,7 +128,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 36, 20, 4),
                   child: Form(
-                    //key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -230,12 +211,9 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                       mobile: _mobileCtrl.text,
                                       price: int.parse(_priceCtrl.text),
                                       description: _descriptionCtrl.text,
-                                      images: [
-                                        "https://i.ibb.co/6sGYmSM/lyndis.jpg"
-                                      ],
+                                      images: _imageServerPath,
                                     );
                                     GetAllAds().createPost(ad);
-                                    //Navigator.pop(context);
                                     Navigator.pushReplacementNamed(
                                       context,
                                       '/',

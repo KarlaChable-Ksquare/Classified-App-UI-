@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:practice_navigation/data/myAds.dart';
 import 'package:practice_navigation/custom_widgets/MyAdsScreen_Card.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';

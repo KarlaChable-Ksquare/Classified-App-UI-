@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
+import 'package:practice_navigation/utils/contants.dart';
 
 class EditAdScreen extends StatefulWidget {
   dynamic data;
@@ -15,6 +21,37 @@ class _EditAdScreenState extends State<EditAdScreen> {
   TextEditingController _priceCtrl = TextEditingController();
   TextEditingController _mobileCtrl = TextEditingController();
   TextEditingController _descriptionCtrl = TextEditingController();
+
+  List<dynamic> _imagePath = [];
+  List<dynamic> _imageServer = [];
+  List<String> _imageServerPath = [];
+
+  void captureImageFromGallery() async {
+    var files = await ImagePicker().pickMultiImage();
+    if (files.isNotEmpty) {
+      _uploadMultitpleFiles(files);
+    }
+  }
+
+  _uploadMultitpleFiles(List<XFile> files) async {
+    var url = Uri.parse("${Constants().serverUrl}/upload/photos");
+    var request = http.MultipartRequest('POST', url);
+    files.forEach((file) async {
+      MultipartFile images =
+          await http.MultipartFile.fromPath('photos', file.path);
+      request.files.add(images);
+    });
+    var response = await request.send();
+    var resp = await response.stream.bytesToString();
+    print(resp);
+    var respJson = jsonDecode(resp);
+    setState(() {
+      _imageServer = respJson['data']['path'];
+      _imageServerPath = _imageServer.map((str) => str.toString()).toList();
+      print(_imageServerPath);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var authorName = widget.data['authorName'];
@@ -37,30 +74,69 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey.shade500,
-                      width: 1,
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        backgroundColor: Color(0xfff25723),
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            padding: EdgeInsets.all(12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      captureImageFromGallery();
+                                    },
+                                    child: Text("Capture Gallery",
+                                        style: TextStyle(color: Colors.white))),
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey.shade500,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
+                    height: 136,
+                    width: 136,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.camera_alt_outlined,
+                          size: 50,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text("Tap to upload")
+                      ],
+                    ),
                   ),
-                  height: 136,
-                  width: 136,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.camera_alt_outlined,
-                        size: 50,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text("Tap to upload")
-                    ],
-                  ),
+                  // child: CircleAvatar(
+                  //   radius: 48,
+                  //   child: _imagePath.isNotEmpty
+                  //       ? CircleAvatar(
+                  //           radius: 48,
+                  //           backgroundImage: FileImage(
+                  //             File(_imagePath),
+                  //           ),
+                  //         )
+                  //       : CircleAvatar(
+                  //           radius: 48,
+                  //           backgroundImage: NetworkImage(
+                  //             widget.data['imgURL'],
+                  //           ),
+                  //         ),
+                  // ),
                 ),
                 SizedBox(
                   height: 105,
@@ -125,7 +201,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 24, 20, 4),
                   child: Form(
-                    //key: _formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -205,16 +280,18 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   ),
                                   onPressed: () {
                                     var ad = AdsModel(
-                                      sId: widget.data['id'],
-                                      authorName: authorName,
-                                      title: _titleCtrl.text,
-                                      mobile: _mobileCtrl.text,
-                                      price: int.parse(_priceCtrl.text),
-                                      description: _descriptionCtrl.text,
-                                      images: [
-                                        "https://i.ibb.co/9WQp2G3/Whats-App-Image-2022-09-15-at-11-58-24-AM.jpg"
-                                      ],
-                                    );
+                                        sId: widget.data['id'],
+                                        authorName: widget.data['authorName'],
+                                        title: _titleCtrl.text,
+                                        mobile: _mobileCtrl.text,
+                                        price: int.parse(_priceCtrl.text),
+                                        description: _descriptionCtrl.text,
+                                        images: _imageServerPath
+                                        //_imageServerPath.isNotEmpty
+                                        //   ? _imageServerPath
+                                        // : widget.data['images']
+                                        );
+
                                     GetAllAds().patchPost(ad);
                                     //Navigator.pop(context);
                                     Navigator.pushReplacementNamed(

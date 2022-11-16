@@ -13,6 +13,7 @@ class MyAdsProvider {
 
   Future<Map<String, String>> _getHeaders() async {
     return {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${await _getToken()}'
     };
@@ -32,7 +33,7 @@ class MyAdsProvider {
       print("error");
       print(e);
     }
-    print(responseJson);
+    //print(responseJson);
     return responseJson;
   }
 
@@ -50,7 +51,7 @@ class MyAdsProvider {
       print("error");
       print(e);
     }
-    print(responseJson);
+    //print(responseJson);
     return responseJson;
   }
 
