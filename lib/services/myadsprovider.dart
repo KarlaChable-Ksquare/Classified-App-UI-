@@ -21,8 +21,6 @@ class MyAdsProvider {
   Future post(endpoint, body) async {
     var responseJson;
     var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
-    //print(requestURL);
-    //print(_getHeaders());
     try {
       var response = await http.post(
         requestURL,

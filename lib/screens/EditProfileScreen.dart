@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/user.dart';
-import 'package:practice_navigation/services/auth.dart';
 import 'package:practice_navigation/services/myuser.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
@@ -198,7 +197,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           shape: BeveledRectangleBorder(),
                                         ),
                                         onPressed: () {
-                                          Navigator.pop(context);
+                                          var userData = UserModel(
+                                              name: _nameCtrl.text,
+                                              email: _emailCtrl.text,
+                                              mobile: _mobileCtrl.text,
+                                              imgURL: _imageServerPath
+                                                      .isNotEmpty
+                                                  ? _imageServerPath
+                                                  : '${widget.data['imgURL']}');
+                                          MyUserService().myUserPatch(userData);
+                                          //Navigator.pop(context);
+                                          Navigator.pushReplacementNamed(
+                                              context, '/');
                                         },
                                         child: Text("Update Profile",
                                             style: TextStyle(
