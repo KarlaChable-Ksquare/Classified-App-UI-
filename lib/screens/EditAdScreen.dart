@@ -23,7 +23,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
   TextEditingController _descriptionCtrl = TextEditingController();
 
   List<dynamic> _imagePath = [];
-  List<dynamic> _imageServer = [];
   List<String> _imageServerPath = [];
 
   void captureImageFromGallery() async {
@@ -46,15 +45,15 @@ class _EditAdScreenState extends State<EditAdScreen> {
     print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
-      _imageServer = respJson['data']['path'];
-      _imageServerPath = _imageServer.map((str) => str.toString()).toList();
+      _imagePath = respJson['data']['path'];
+      _imageServerPath = _imagePath.map((str) => str.toString()).toList();
       print(_imageServerPath);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var authorName = widget.data['authorName'];
+    //var authorName = widget.data['authorName'];
     _titleCtrl.text = widget.data['title'];
     _priceCtrl.text = widget.data['price'].toString();
     _mobileCtrl.text = widget.data['mobile'];
@@ -122,22 +121,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
                       ],
                     ),
                   ),
-                  // child: CircleAvatar(
-                  //   radius: 48,
-                  //   child: _imagePath.isNotEmpty
-                  //       ? CircleAvatar(
-                  //           radius: 48,
-                  //           backgroundImage: FileImage(
-                  //             File(_imagePath),
-                  //           ),
-                  //         )
-                  //       : CircleAvatar(
-                  //           radius: 48,
-                  //           backgroundImage: NetworkImage(
-                  //             widget.data['imgURL'],
-                  //           ),
-                  //         ),
-                  // ),
                 ),
                 SizedBox(
                   height: 105,
@@ -146,7 +129,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: widget.data['images'].length,
+                        itemCount: _imageServerPath.isNotEmpty
+                            ? _imageServerPath.length
+                            : widget.data['images'].length,
                         itemBuilder: ((context, index) {
                           return Container(
                             child: Row(
@@ -154,14 +139,17 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        backgroundColor: Color(0xfff25723),
+                                        backgroundColor:
+                                            Color.fromRGBO(242, 87, 35, 0.4),
                                         context: context,
                                         builder: (context) {
                                           return Container(
                                             padding: EdgeInsets.all(12),
                                             child: SizedBox(
                                               child: Image.network(
-                                                "${widget.data['images'][index]}",
+                                                _imageServerPath.isNotEmpty
+                                                    ? "${_imageServerPath[index]}"
+                                                    : "${widget.data['images'][index]}",
                                                 fit: BoxFit.cover,
                                               ),
                                               height: 548,
@@ -187,7 +175,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                       height: double.infinity,
                                       width: double.infinity,
                                       child: Image.network(
-                                        widget.data['images'][index],
+                                        _imageServerPath.isNotEmpty
+                                            ? _imageServerPath[index]
+                                            : widget.data['images'][index],
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -281,17 +271,15 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   ),
                                   onPressed: () {
                                     var ad = AdsModel(
-                                        sId: widget.data['id'],
                                         authorName: widget.data['authorName'],
+                                        sId: widget.data['id'],
                                         title: _titleCtrl.text,
                                         mobile: _mobileCtrl.text,
                                         price: int.parse(_priceCtrl.text),
                                         description: _descriptionCtrl.text,
-                                        images: _imageServerPath
-                                        //_imageServerPath.isNotEmpty
-                                        //   ? _imageServerPath
-                                        // : widget.data['images']
-                                        );
+                                        images: _imageServerPath.isNotEmpty
+                                            ? _imageServerPath
+                                            : widget.data['images']);
                                     print(ad.toJson());
                                     GetAllAds().patchPost(ad);
                                     //Navigator.pop(context);

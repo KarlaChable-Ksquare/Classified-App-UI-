@@ -122,10 +122,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 0,
-                ),
-                SizedBox(
-                  height: _imageServerPath.length > 0 ? 105 : 1,
+                  height: _imageServerPath.isNotEmpty ? 105 : 1,
                   width: double.infinity,
                   child: Container(
                     margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -184,9 +181,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                           );
                         })),
                   ),
-                ),
-                SizedBox(
-                  height: 0,
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 36, 20, 4),
