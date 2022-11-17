@@ -40,7 +40,7 @@ class MyAdsScreenCard extends StatelessWidget {
           'id': id,
           'title': title,
           "price": price.toString(),
-          'createdBy': authorName,
+          'authorName': authorName,
           'createdAt': createdAt,
           'mobile': mobile,
           'description': description,

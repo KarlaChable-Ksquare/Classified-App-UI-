@@ -59,6 +59,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
     _priceCtrl.text = widget.data['price'].toString();
     _mobileCtrl.text = widget.data['mobile'];
     _descriptionCtrl.text = widget.data['description'];
+    print('Data: ${widget.data}');
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -291,7 +292,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         //   ? _imageServerPath
                                         // : widget.data['images']
                                         );
-
+                                    print(ad.toJson());
                                     GetAllAds().patchPost(ad);
                                     //Navigator.pop(context);
                                     Navigator.pushReplacementNamed(

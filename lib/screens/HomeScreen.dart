@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                   id: adsData.ads[index]['id'],
                   title: adsData.ads[index]['title'],
                   price: adsData.ads[index]['price'],
-                  createdBy: adsData.ads[index]['createdBy'],
+                  : adsData.ads[index]['createdBy'],
                   createdAt: adsData.ads[index]['createdAt'],
                   mobile: adsData.ads[index]['mobile'],
                   description: adsData.ads[index]['description'],

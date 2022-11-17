@@ -12,19 +12,17 @@ class CreateAdScreen extends StatefulWidget {
   CreateAdScreen({
     super.key,
   });
-
   @override
   State<CreateAdScreen> createState() => _CreateAdScreenState();
 }
 
 class _CreateAdScreenState extends State<CreateAdScreen> {
-  TextEditingController _titleCtrl = TextEditingController();
-  TextEditingController _priceCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
-  TextEditingController _descriptionCtrl = TextEditingController();
+  final TextEditingController _titleCtrl = TextEditingController();
+  final TextEditingController _priceCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
+  final TextEditingController _descriptionCtrl = TextEditingController();
 
   List<dynamic> _imagePath = [];
-  List<dynamic> _imageServer = [];
   List<String> _imageServerPath = [];
 
   void captureImageFromGallery() async {
@@ -47,9 +45,8 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
     print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
-      _imageServer = respJson['data']['path'];
-      List<String> _imageServerPath =
-          _imageServer.map((str) => str.toString()).toList();
+      _imagePath = respJson['data']['path'];
+      _imageServerPath = _imagePath.map((str) => str.toString()).toList();
       print(_imageServerPath);
     });
   }
@@ -84,6 +81,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                 TextButton(
                                     onPressed: () {
                                       captureImageFromGallery();
+                                      //print('')
                                     },
                                     child: Text("Capture Gallery",
                                         style: TextStyle(color: Colors.white))),
@@ -102,27 +100,20 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                     ),
                     height: 136,
                     width: 136,
-                    child: _imagePath.isNotEmpty
-                        ? Image.file(
-                            File(_imagePath[0]),
-                            height: 136,
-                            width: 136,
-                            fit: BoxFit.cover,
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_a_photo_outlined,
-                                size: 40,
-                              ),
-                              SizedBox(
-                                height: 4,
-                              ),
-                              Text("Tap to upload")
-                            ],
-                          ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_a_photo_outlined,
+                          size: 40,
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text("Tap to upload")
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -213,6 +204,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                       description: _descriptionCtrl.text,
                                       images: _imageServerPath,
                                     );
+                                    print(ad.toJson());
                                     GetAllAds().createPost(ad);
                                     Navigator.pushReplacementNamed(
                                       context,
