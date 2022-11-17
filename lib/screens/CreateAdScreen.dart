@@ -22,6 +22,12 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
   final TextEditingController _mobileCtrl = TextEditingController();
   final TextEditingController _descriptionCtrl = TextEditingController();
 
+  final List<String> _randomPics = [
+    'https://picsum.photos/200/300',
+    'https://picsum.photos/200/300',
+    'https://picsum.photos/200/300'
+  ];
+
   List<dynamic> _imagePath = [];
   List<String> _imageServerPath = [];
 
@@ -81,7 +87,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                 TextButton(
                                     onPressed: () {
                                       captureImageFromGallery();
-                                      //print('')
                                     },
                                     child: Text("Capture Gallery",
                                         style: TextStyle(color: Colors.white))),
@@ -115,6 +120,73 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 0,
+                ),
+                SizedBox(
+                  height: _imageServerPath.length > 0 ? 105 : 1,
+                  width: double.infinity,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _imageServerPath.length,
+                        itemBuilder: ((context, index) {
+                          return Container(
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        backgroundColor:
+                                            Color.fromRGBO(242, 87, 35, 0.4),
+                                        context: context,
+                                        builder: (context) {
+                                          return Container(
+                                            padding: EdgeInsets.all(12),
+                                            child: SizedBox(
+                                              child: Image.network(
+                                                "${_imageServerPath[index]}",
+                                                fit: BoxFit.cover,
+                                              ),
+                                              height: 548,
+                                              width: double.infinity,
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                    height: 80,
+                                    width: 88,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                        color: Colors.grey.shade500,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.all(4),
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      child: Image.network(
+                                        _imageServerPath[index],
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        })),
+                  ),
+                ),
+                SizedBox(
+                  height: 0,
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 36, 20, 4),
@@ -198,12 +270,13 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                   ),
                                   onPressed: () {
                                     var ad = AdsModel(
-                                      title: _titleCtrl.text,
-                                      mobile: _mobileCtrl.text,
-                                      price: int.parse(_priceCtrl.text),
-                                      description: _descriptionCtrl.text,
-                                      images: _imageServerPath,
-                                    );
+                                        title: _titleCtrl.text,
+                                        mobile: _mobileCtrl.text,
+                                        price: int.parse(_priceCtrl.text),
+                                        description: _descriptionCtrl.text,
+                                        images: _imageServerPath.length > 0
+                                            ? _imageServerPath
+                                            : _randomPics);
                                     print(ad.toJson());
                                     GetAllAds().createPost(ad);
                                     Navigator.pushReplacementNamed(
