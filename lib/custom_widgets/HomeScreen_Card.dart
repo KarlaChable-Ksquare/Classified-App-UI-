@@ -4,7 +4,7 @@ class HomeScreenCard extends StatelessWidget {
   String id;
   String title;
   String description;
-  int price;
+  num price;
   List<String> images;
   String authorName;
   String userId;

@@ -7,14 +7,24 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthService {
-  void register(UserModel user) async {
+  void register(context, UserModel user) async {
     var url = Uri.parse("${Constants().serverUrl}/auth/register");
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
-      //print(resp.body);
+      var respObj = jsonDecode(resp.body);
+      print(respObj['status']);
+
+      if (respObj['status'] == false) {
+        AlertManager().displaySnackRegisterFalse(context, respObj['message']);
+      }
+      if (respObj['status'] == true) {
+        print(userObj);
+        print('userdata enviado al server');
+        AlertManager().displaySnackRegisterTrue(context, 'Successful Register');
+      }
     } catch (e) {
       print(e);
     }
@@ -23,22 +33,23 @@ class AuthService {
   void login(context, UserModel user) async {
     var storage = FlutterSecureStorage();
     var url = Uri.parse("${Constants().serverUrl}/auth/login");
-    print('login exitoso');
+    print('push en login');
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
       var respObj = jsonDecode(resp.body);
-      //print(respObj);
+      print(respObj['status']);
       if (respObj['status'] == false) {
-        AlertManager().displaySnackbar(context, respObj['message']);
+        AlertManager().displaySnackbarError(context, respObj['message']);
       }
       if (respObj['status'] == true) {
         storage.write(key: 'userId', value: respObj['data']['user']['_id']);
         storage.write(key: 'token', value: respObj['data']['token']);
         storage.write(
             key: 'refreshToken', value: respObj['data']['refreshToken']);
+        AlertManager().displaySnackbarSuccess(context, respObj['message']);
         Navigator.pushNamed(context, '/');
       }
     } catch (e) {

@@ -275,7 +275,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         sId: widget.data['id'],
                                         title: _titleCtrl.text,
                                         mobile: _mobileCtrl.text,
-                                        price: int.parse(_priceCtrl.text),
+                                        price: num.parse(_priceCtrl.text),
                                         description: _descriptionCtrl.text,
                                         images: _imageServerPath.isNotEmpty
                                             ? _imageServerPath

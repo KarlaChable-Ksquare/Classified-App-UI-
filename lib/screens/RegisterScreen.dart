@@ -16,6 +16,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _passwordCtrl = TextEditingController();
   var _formKey = GlobalKey<FormState>();
 
+  bool _isLoading = false;
+  void _startLoading() async {
+    setState(() {
+      _isLoading = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           email: _emailCtrl.text,
                                           mobile: _mobileCtrl.text,
                                           password: _passwordCtrl.text);
-                                      AuthService().register(user);
+                                      AuthService().register(context, user);
                                     }
                                   },
                                   child: Text("Register Now",

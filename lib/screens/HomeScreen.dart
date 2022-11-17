@@ -56,11 +56,12 @@ class HomeScreen extends StatelessWidget {
                   List<AdsModel> ads = snapshot.data!;
                   return GridView.builder(
                     padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 8,
-                        childAspectRatio: 0.72),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 8,
+                            childAspectRatio: 0.72),
                     itemCount: ads.length,
                     itemBuilder: (((context, index) {
                       return HomeScreenCard(
@@ -77,7 +78,6 @@ class HomeScreen extends StatelessWidget {
                     })),
                   );
                 }
-                //
                 if (snapshot.hasError) {
                   return const Center(child: Text("Something went wrong"));
                 }
@@ -87,29 +87,6 @@ class HomeScreen extends StatelessWidget {
                         color: Color(0xfff25723)));
               }),
             ),
-            /*child: GridView.builder(
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 0.72),
-              itemCount: adsData.ads.length,
-              itemBuilder: (context, index) {
-                return HomeScreenCard(
-                  id: adsData.ads[index]['id'],
-                  title: adsData.ads[index]['title'],
-                  price: adsData.ads[index]['price'],
-                  : adsData.ads[index]['createdBy'],
-                  createdAt: adsData.ads[index]['createdAt'],
-                  mobile: adsData.ads[index]['mobile'],
-                  description: adsData.ads[index]['description'],
-                  imagesAll: adsData.ads[index]['images'],
-                  images: adsData.ads[index]['images'][0],
-                );
-              },
-            ),
-            */
           ),
         ],
       ))
