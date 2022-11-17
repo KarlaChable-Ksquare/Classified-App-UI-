@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/user.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _nameCtrl = TextEditingController();
   TextEditingController _emailCtrl = TextEditingController();
   TextEditingController _mobileCtrl = TextEditingController();
+  bool _isLoading = false;
 
   String _imagePath = '';
   String _imageServerPath = '';
@@ -192,29 +194,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     height: 56,
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color(0xfff25723),
-                                          shape: BeveledRectangleBorder(),
-                                        ),
-                                        onPressed: () {
-                                          var userData = UserModel(
-                                              name: _nameCtrl.text,
-                                              email: _emailCtrl.text,
-                                              mobile: _mobileCtrl.text,
-                                              imgURL: _imageServerPath
-                                                      .isNotEmpty
-                                                  ? _imageServerPath
-                                                  : '${widget.data['imgURL']}');
-                                          MyUserService().myUserPatch(userData);
-                                          //Navigator.pop(context);
-                                          Navigator.pushReplacementNamed(
-                                              context, '/');
-                                        },
-                                        child: Text("Update Profile",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold))),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(0xfff25723),
+                                        shape: BeveledRectangleBorder(),
+                                      ),
+                                      child: _isLoading
+                                          ? CirculatorManager().formUpdate()
+                                          : Text("Update Profile",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold)),
+                                      onPressed: () async {
+                                        var userData = UserModel(
+                                            name: _nameCtrl.text,
+                                            email: _emailCtrl.text,
+                                            mobile: _mobileCtrl.text,
+                                            imgURL: _imageServerPath.isNotEmpty
+                                                ? _imageServerPath
+                                                : '${widget.data['imgURL']}');
+                                        MyUserService()
+                                            .myUserPatch(context, userData);
+                                        //Navigator.pushReplacementNamed(
+                                        // context, '/');
+                                        //Navigator.pop(context);
+                                        if (_isLoading) return;
+                                        setState(() {
+                                          _isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            Duration(seconds: 3));
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                      },
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 24,
@@ -245,9 +259,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               print(snapshot.hasError);
               return const Center(child: Text("Something went wrong :( "));
             }
-            return const Center(
-                child: CircularProgressIndicator(
-                    backgroundColor: Colors.black, color: Color(0xfff25723)));
+            return CirculatorManager().circleUpdate();
           })),
     );
   }

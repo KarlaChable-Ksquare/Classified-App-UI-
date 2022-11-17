@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -97,10 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     return const Center(
                         child: Text("Something went wrong :( "));
                   }
-                  return const Center(
-                      child: CircularProgressIndicator(
-                          backgroundColor: Colors.black,
-                          color: Color(0xfff25723)));
+                  return CirculatorManager().circleUpdate();
                 })),
             Row(
               children: [

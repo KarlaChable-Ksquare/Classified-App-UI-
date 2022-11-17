@@ -3,6 +3,7 @@ import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
@@ -36,11 +37,7 @@ class HomeScreen extends StatelessWidget {
                       child: Text("Something wrong"),
                     );
                   }
-                  return const Center(
-                    child: CircularProgressIndicator(
-                        backgroundColor: Colors.black,
-                        color: Color(0xfff25723)),
-                  );
+                  return CirculatorManager().circleUpdate();
                 })),
               ))
         ],
@@ -81,10 +78,7 @@ class HomeScreen extends StatelessWidget {
                 if (snapshot.hasError) {
                   return const Center(child: Text("Something went wrong"));
                 }
-                return const Center(
-                    child: CircularProgressIndicator(
-                        backgroundColor: Colors.black,
-                        color: Color(0xfff25723)));
+                return CirculatorManager().circleUpdate();
               }),
             ),
           ),

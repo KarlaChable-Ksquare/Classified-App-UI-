@@ -21,8 +21,8 @@ class AuthService {
         AlertManager().displaySnackRegisterFalse(context, respObj['message']);
       }
       if (respObj['status'] == true) {
-        print(userObj);
-        print('userdata enviado al server');
+        //print(userObj);
+        //print('userdata enviado al server');
         AlertManager().displaySnackRegisterTrue(context, 'Successful Register');
       }
     } catch (e) {
@@ -33,7 +33,7 @@ class AuthService {
   void login(context, UserModel user) async {
     var storage = FlutterSecureStorage();
     var url = Uri.parse("${Constants().serverUrl}/auth/login");
-    print('push en login');
+    //print('push en login');
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,

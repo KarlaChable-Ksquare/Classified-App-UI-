@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/user.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -27,14 +28,14 @@ class MyUserService {
     if (resp.statusCode == 500) {
       print("Server Error");
     }
-    print(resp.body);
+    //print(resp.body);
     var respJson = jsonDecode(resp.body);
     var postData = respJson['data'];
     userData = postData;
     return userData;
   }
 
-  Future<Map> myUserPatch(UserModel user) async {
+  Future<Map> myUserPatch(context, UserModel user) async {
     var storage = FlutterSecureStorage();
     Map userData;
     var url = Uri.parse("${Constants().serverUrl}/user");
@@ -57,11 +58,20 @@ class MyUserService {
     if (resp.statusCode == 500) {
       print("Server Error");
     }
-    //print(resp.body);
+    print(resp.body);
+
     var respJson = jsonDecode(resp.body);
     var patchData = respJson['data'];
     userData = patchData;
-    //print(userData);
+    print(userData);
+
+    if (respJson['status'] == true) {
+      AlertManager().displaySnackbarSuccess(context, 'Successful Update');
+    }
+    if (respJson['status'] == false) {
+      AlertManager()
+          .displaySnackbarError(context, 'Error = ${resp.statusCode}');
+    }
     return userData;
   }
 }
