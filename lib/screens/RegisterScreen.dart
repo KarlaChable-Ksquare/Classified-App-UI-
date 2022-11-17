@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/model/user.dart';
 import 'package:practice_navigation/services/auth.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -17,11 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var _formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
-  void _startLoading() async {
-    setState(() {
-      _isLoading = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +116,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   if (value!.isEmpty) {
                                     return "This is required";
                                   }
-                                  if (value.length < 4) {
-                                    return "Password must be 4 chars";
+                                  if (value.length < 6) {
+                                    return "Password must be 6 chars";
                                   }
                                 },
                                 decoration: InputDecoration(
@@ -142,25 +138,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 56,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xfff25723),
-                                    shape: BeveledRectangleBorder(),
-                                  ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      UserModel user = UserModel(
-                                          name: _nameCtrl.text,
-                                          email: _emailCtrl.text,
-                                          mobile: _mobileCtrl.text,
-                                          password: _passwordCtrl.text);
-                                      AuthService().register(context, user);
-                                    }
-                                  },
-                                  child: Text("Register Now",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold))),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xfff25723),
+                                  shape: BeveledRectangleBorder(),
+                                ),
+                                child: _isLoading
+                                    ? CirculatorManager().formUpdate()
+                                    : Text("Register Now",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    UserModel user = UserModel(
+                                        name: _nameCtrl.text,
+                                        email: _emailCtrl.text,
+                                        mobile: _mobileCtrl.text,
+                                        password: _passwordCtrl.text);
+                                    AuthService().register(context, user);
+                                  }
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 1500));
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                },
+                              ),
                             ),
                             SizedBox(
                               height: 12,

@@ -15,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController(text: "karla@demo.com");
   TextEditingController _passwordCtrl = TextEditingController(text: "464646");
   var _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   if (value!.isEmpty) {
                                     return "This is required";
                                   }
-                                  if (value.length < 4) {
-                                    return "Password must be 4 chars";
+                                  if (value.length < 6) {
+                                    return "Password must be 6 chars";
                                   }
                                 },
                                 decoration: InputDecoration(
@@ -91,21 +92,32 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 56,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xfff25723),
-                                    shape: BeveledRectangleBorder(),
-                                  ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      UserModel user = UserModel(
-                                          email: _emailCtrl.text,
-                                          password: _passwordCtrl.text);
-                                      AuthService().login(context, user);
-                                    }
-                                  },
-                                  child: Text("Login",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 16))),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color(0xfff25723),
+                                  shape: BeveledRectangleBorder(),
+                                ),
+                                child: _isLoading
+                                    ? CirculatorManager().formUpdate()
+                                    : const Text("Login",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16)),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    UserModel user = UserModel(
+                                        email: _emailCtrl.text,
+                                        password: _passwordCtrl.text);
+                                    AuthService().login(context, user);
+                                  }
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await Future.delayed(Duration(seconds: 3));
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                },
+                              ),
                             ),
                             SizedBox(
                               height: 12,
