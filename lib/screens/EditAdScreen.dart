@@ -70,33 +70,46 @@ class _EditAdScreenState extends State<EditAdScreen> {
               icon: const Icon(Icons.delete),
               onPressed: () {
                 showDialog(
-                    barrierColor: Color.fromRGBO(242, 87, 35, 0.35),
+                    barrierColor: const Color.fromRGBO(242, 87, 35, 0.35),
                     context: context,
                     builder: ((context) {
                       return AlertDialog(
-                        title: Text("Delete AD"),
+                        title: const Text("Delete AD"),
                         content: Text("Do you want delete this Ad?"),
                         actions: [
-                          TextButton(
-                              onPressed: () {
-                                var ad = AdsModel(
-                                    authorName: widget.data['authorName'],
-                                    sId: widget.data['id'],
-                                    title: _titleCtrl.text,
-                                    mobile: _mobileCtrl.text,
-                                    price: num.parse(_priceCtrl.text),
-                                    description: _descriptionCtrl.text,
-                                    images: _imageServerPath.isNotEmpty
-                                        ? _imageServerPath
-                                        : widget.data['images']);
-                                GetAllAds().deletePost(ad, context);
-                              },
-                              child: Text("Yes")),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text("No"))
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    var ad = AdsModel(
+                                        sId: widget.data['id'],
+                                        authorName: widget.data['authorName'],
+                                        title: _titleCtrl.text,
+                                        mobile: _mobileCtrl.text,
+                                        price: num.parse(_priceCtrl.text),
+                                        description: _descriptionCtrl.text,
+                                        images: _imageServerPath.isNotEmpty
+                                            ? _imageServerPath
+                                            : widget.data['images']);
+                                    GetAllAds().deletePost(ad, context);
+                                  },
+                                  child: const Text(
+                                    "Yes",
+                                    style: TextStyle(
+                                        color: Color(0xfff25723),
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("No",
+                                      style: TextStyle(
+                                          color: Color(0xfff25723),
+                                          fontWeight: FontWeight.bold)))
+                            ],
+                          )
                         ],
                       );
                     }));
@@ -146,7 +159,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           Icons.camera_alt_outlined,
                           size: 50,
@@ -313,8 +326,8 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                             fontWeight: FontWeight.bold)),
                                 onPressed: () async {
                                   var ad = AdsModel(
-                                      authorName: widget.data['authorName'],
                                       sId: widget.data['id'],
+                                      authorName: widget.data['authorName'],
                                       title: _titleCtrl.text,
                                       mobile: _mobileCtrl.text,
                                       price: num.parse(_priceCtrl.text),
