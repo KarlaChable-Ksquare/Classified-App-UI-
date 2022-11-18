@@ -289,7 +289,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.pop(context);
                                 },
                               ),
                             ),

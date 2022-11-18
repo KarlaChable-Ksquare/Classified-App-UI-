@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/user.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/circulator.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
@@ -233,8 +234,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   TextButton(
                                       onPressed: () {
                                         Navigator.pushReplacementNamed(
-                                            context, '/login',
-                                            arguments: {});
+                                            context, '/login');
                                       },
                                       child: const Text("Logout",
                                           style: TextStyle(
@@ -254,7 +254,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             }
             if (snapshot.hasError) {
               //print(snapshot.hasError);
-              return const Center(child: Text("Something went wrong :( "));
+              return AlertManager().errorMessage();
             }
             return CirculatorManager().circleUpdate();
           })),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/user.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
@@ -66,7 +67,8 @@ class MyUserService {
     //print(userData);
 
     if (respJson['status'] == true) {
-      AlertManager().displaySnackbarSuccess(context, 'Successful Update Add');
+      AlertManager().displaySnackbarSuccess(context, 'Successful Update User');
+      Navigator.pushNamed(context, '/settings');
     }
     if (respJson['status'] == false) {
       AlertManager()
@@ -75,29 +77,3 @@ class MyUserService {
     return userData;
   }
 }
-
-/*
-    var url = Uri.parse("${Constants().serverUrl}/ads/user");
-    var token = await storage.read(key: 'token');
-    //try {
-    var res = await http.post(url, headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token'
-    });
-    print(res.statusCode);
-    if (res.statusCode == 401) {
-      var isNewTokenGenerated = await AuthService().refreshToken();
-      if (isNewTokenGenerated) {
-        fetchMyPosts();
-      }
-    }
-    print(res.body);
-    var resAsJSON = jsonDecode(res.body);
-    var postData = resAsJSON['data'];
-    ads = postData.map<AdsModel>((post) => AdsModel.fromJson(post)).toList();
-    return ads;
-    } catch (e) {
-    print('Error $e');
-    return ads;
-    }
-    */

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AlertManager {
+  errorMessage() {
+    return const Center(child: Text("Something went wrong :( "));
+  }
+
   displaySnackbarError(context, message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(seconds: 2),

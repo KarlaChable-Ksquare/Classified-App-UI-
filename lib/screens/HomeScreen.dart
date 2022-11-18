@@ -3,6 +3,7 @@ import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/circulator.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,9 +34,7 @@ class HomeScreen extends StatelessWidget {
                     );
                   }
                   if (snapshot.hasError) {
-                    return const Center(
-                      child: Text("Something wrong"),
-                    );
+                    return AlertManager().errorMessage();
                   }
                   return CirculatorManager().circleUpdate();
                 })),
@@ -76,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
                 if (snapshot.hasError) {
-                  return const Center(child: Text("Something went wrong"));
+                  return AlertManager().errorMessage();
                 }
                 return CirculatorManager().circleUpdate();
               }),

@@ -333,7 +333,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  Navigator.pop(context);
+                                  //Navigator.pop(context);
                                 },
                               ),
                             ),
