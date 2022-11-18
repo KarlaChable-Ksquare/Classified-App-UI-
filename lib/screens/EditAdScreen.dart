@@ -75,7 +75,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     builder: ((context) {
                       return AlertDialog(
                         title: const Text("Delete AD"),
-                        content: Text("Do you want delete this Ad?"),
+                        content: const Text("Do you want delete this Ad?"),
                         actions: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -195,14 +195,14 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         return Container(
                                           padding: const EdgeInsets.all(12),
                                           child: SizedBox(
+                                            height: 548,
+                                            width: double.infinity,
                                             child: Image.network(
                                               _imageServerPath.isNotEmpty
-                                                  ? "${_imageServerPath[index]}"
+                                                  ? _imageServerPath[index]
                                                   : "${widget.data['images'][index]}",
                                               fit: BoxFit.cover,
                                             ),
-                                            height: 548,
-                                            width: double.infinity,
                                           ),
                                         );
                                       });
@@ -346,7 +346,6 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  //Navigator.pop(context);
                                 },
                               ),
                             ),

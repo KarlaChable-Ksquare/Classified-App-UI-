@@ -7,7 +7,7 @@ import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/circulator.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({
+  const HomeScreen({
     super.key,
   });
 
@@ -41,8 +41,7 @@ class HomeScreen extends StatelessWidget {
               ))
         ],
       ),
-      body: Container(
-          child: Column(
+      body: Column(
         children: [
           Expanded(
             child: FutureBuilder(
@@ -82,7 +81,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
-      ))
+      )
       //
       ,
       floatingActionButton: FloatingActionButton(

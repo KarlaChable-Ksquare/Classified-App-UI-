@@ -40,7 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void captureImageFromCamera() async {
     var file = await ImagePicker().pickImage(source: ImageSource.camera);
     if (file != null) {
-      print(file.path);
+      //print(file.path);
       setState(() {
         _imagePath = file.path;
         //print(_imageServerPath);
@@ -196,7 +196,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: const Color(0xfff25723),
+                                        backgroundColor:
+                                            const Color(0xfff25723),
                                         shape: const BeveledRectangleBorder(),
                                       ),
                                       child: _isLoading

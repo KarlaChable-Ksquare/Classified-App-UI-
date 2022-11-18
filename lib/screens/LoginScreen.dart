@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController(text: "karla@demo.com");
   final TextEditingController _passwordCtrl =
       TextEditingController(text: "464646");
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
   @override

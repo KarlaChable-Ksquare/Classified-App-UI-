@@ -4,7 +4,7 @@ import 'package:practice_navigation/utils/circulator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingScreen extends StatefulWidget {
-  SettingScreen({
+  const SettingScreen({
     super.key,
   });
 
@@ -27,10 +27,10 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("Setting Screen"),
+        title: const Text("Setting Screen"),
       ),
       body: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 16),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -108,7 +107,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: const [
                         Icon(
                           Icons.add_a_photo_outlined,
                           size: 40,
@@ -136,19 +135,19 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
-                                        backgroundColor:
-                                            Color.fromRGBO(242, 87, 35, 0.4),
+                                        backgroundColor: const Color.fromRGBO(
+                                            242, 87, 35, 0.4),
                                         context: context,
                                         builder: (context) {
                                           return Container(
                                             padding: const EdgeInsets.all(12),
                                             child: SizedBox(
-                                              child: Image.network(
-                                                "${_imageServerPath[index]}",
-                                                fit: BoxFit.cover,
-                                              ),
                                               height: 548,
                                               width: double.infinity,
+                                              child: Image.network(
+                                                _imageServerPath[index],
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           );
                                         });
@@ -260,7 +259,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: const Color(0xfff25723),
+                                  backgroundColor: const Color(0xfff25723),
                                   shape: const BeveledRectangleBorder(),
                                 ),
                                 child: _isLoading

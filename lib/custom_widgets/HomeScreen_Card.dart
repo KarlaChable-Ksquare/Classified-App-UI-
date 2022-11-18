@@ -70,7 +70,7 @@ class HomeScreenCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     height: 64,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -83,16 +83,16 @@ class HomeScreenCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text('\$ ${price.toString()}', //.toString()
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromRGBO(233, 167, 81, 1),
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold)),

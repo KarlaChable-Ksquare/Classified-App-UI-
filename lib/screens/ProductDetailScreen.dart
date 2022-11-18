@@ -15,7 +15,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      print("Error");
+      //print("Error");
     }
   }
 
@@ -96,27 +96,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(
                           height: 16,
                         ),
-                        Container(
-                          child: SizedBox(
-                            height: 232,
-                            width: double.infinity,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/imageviewer',
-                                    arguments: {
-                                      'images': widget.data['images'],
-                                    });
+                        SizedBox(
+                          height: 232,
+                          width: double.infinity,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/imageviewer',
+                                  arguments: {
+                                    'images': widget.data['images'],
+                                  });
+                            },
+                            child: Image.network(
+                              pictureRender(),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.network(
+                                  "https://i.ibb.co/CbJyRbH/Lilie.jpg",
+                                  fit: BoxFit.cover,
+                                );
                               },
-                              child: Image.network(
-                                pictureRender(),
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Image.network(
-                                    "https://i.ibb.co/CbJyRbH/Lilie.jpg",
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                              ),
                             ),
                           ),
                         ),
@@ -125,25 +123,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.person_outline),
-                                  const Text("- All"),
-                                ],
-                              ),
+                            Row(
+                              children: const [
+                                Icon(Icons.person_outline),
+                                Text("- All"),
+                              ],
                             ),
                             const SizedBox(
                               width: 24,
                             ),
-                            Container(
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.access_time),
-                                  Text(
-                                      "-${calculateTime(createAt).toString()} - Days ago")
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                const Icon(Icons.access_time),
+                                Text(
+                                    "-${calculateTime(createAt).toString()} - Days ago")
+                              ],
                             ),
                           ],
                         ),
@@ -171,7 +165,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xfff25723),
-                                shape: BeveledRectangleBorder(),
+                                shape: const BeveledRectangleBorder(),
                               ),
                               onPressed: () {
                                 showCustomSnackBar();

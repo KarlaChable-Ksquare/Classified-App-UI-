@@ -57,12 +57,12 @@ class MyAdsScreenCard extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(4),
             ),
-            margin: EdgeInsets.fromLTRB(16, 8, 16, 0),
+            margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             height: 112,
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                   child: Container(
                     width: 96,
                     color: Colors.white,
@@ -76,35 +76,35 @@ class MyAdsScreenCard extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.access_time,
                             size: 12,
                           ),
                           Text(
                             "-${calculateTime(createAt).toString()} - Days ago",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 12,
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
                         '\$ ${price.toString()}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Color.fromRGBO(255, 129, 58, 1),
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
