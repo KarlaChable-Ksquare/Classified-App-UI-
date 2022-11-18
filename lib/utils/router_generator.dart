@@ -17,7 +17,7 @@ class RouterGenerator {
     switch (routeName) {
       case '/':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: HomeScreen()));
+            builder: (context) => const SafeArea(child: HomeScreen()));
 
       case '/login':
         return MaterialPageRoute(
@@ -29,7 +29,7 @@ class RouterGenerator {
 
       case '/settings':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: SettingScreen()));
+            builder: (context) => const SafeArea(child: SettingScreen()));
 
       case '/editprofile':
         return MaterialPageRoute(
@@ -40,7 +40,7 @@ class RouterGenerator {
 
       case '/myads':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: MyAdsScreen()));
+            builder: (context) => const SafeArea(child: MyAdsScreen()));
 
       case '/createad':
         return MaterialPageRoute(

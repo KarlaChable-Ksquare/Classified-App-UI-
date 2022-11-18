@@ -7,7 +7,7 @@ import 'package:practice_navigation/styles/theme.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.remove();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: CustomTheme().theme,
-      home: SafeArea(child: HomeScreen()),
+      home: const SafeArea(child: HomeScreen()),
       initialRoute: '/login',
       onGenerateRoute: RouterGenerator().routerGenerate,
     );

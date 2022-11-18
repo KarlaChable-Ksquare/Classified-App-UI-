@@ -14,10 +14,10 @@ class CirculatorManager {
       height: 52,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          const CircularProgressIndicator(
+        children: const [
+          CircularProgressIndicator(
               backgroundColor: Colors.white, color: Colors.black),
-          const Text('Please Wait')
+          Text('Please Wait')
         ],
       ),
     );
