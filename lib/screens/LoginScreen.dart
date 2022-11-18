@@ -11,9 +11,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailCtrl =
+  final TextEditingController _emailCtrl =
       TextEditingController(text: "karla@demo.com");
-  TextEditingController _passwordCtrl = TextEditingController(text: "464646");
+  final TextEditingController _passwordCtrl =
+      TextEditingController(text: "464646");
   var _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
@@ -31,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset("images/merida.png", fit: BoxFit.cover),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 30, 20, 5),
+                  margin: const EdgeInsets.fromLTRB(20, 30, 20, 5),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -51,16 +52,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Email Address",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.email,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextFormField(
@@ -76,16 +77,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Password",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.password,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(
@@ -93,8 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xfff25723),
-                                  shape: BeveledRectangleBorder(),
+                                  backgroundColor: const Color(0xfff25723),
+                                  shape: const BeveledRectangleBorder(),
                                 ),
                                 child: _isLoading
                                     ? CirculatorManager().formUpdate()
@@ -112,21 +113,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                   setState(() {
                                     _isLoading = true;
                                   });
-                                  await Future.delayed(Duration(seconds: 3));
+                                  await Future.delayed(
+                                      const Duration(seconds: 3));
                                   setState(() {
                                     _isLoading = false;
                                   });
                                 },
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/register');
                                 },
-                                child: Text("Don't have any account?",
+                                child: const Text("Don't have any account?",
                                     style: TextStyle(
                                         color: Color.fromRGBO(242, 87, 35, 1),
                                         fontSize: 12,

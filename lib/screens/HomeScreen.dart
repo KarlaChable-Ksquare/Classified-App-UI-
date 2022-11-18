@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: Text("Ads Listing"),
+        title: const Text("Ads Listing"),
         actions: [
           GestureDetector(
               onTap: () {
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                 if (snapshot.hasData) {
                   List<AdsModel> ads = snapshot.data!;
                   return GridView.builder(
-                    padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -90,9 +90,9 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/createad', arguments: {});
         },
-        backgroundColor: Color(0xfff25723),
+        backgroundColor: const Color(0xfff25723),
         elevation: 8,
-        child: Icon(
+        child: const Icon(
           Icons.add_a_photo_outlined,
         ),
       ),

@@ -18,9 +18,9 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  TextEditingController _nameCtrl = TextEditingController();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
   bool _isLoading = false;
 
   String _imagePath = '';
@@ -28,7 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void captureImageFromGallery() async {
     var file = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (file != null) {
-      print(file.path);
+      //print(file.path);
       setState(() {
         _imagePath = file.path;
       });
@@ -42,7 +42,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       print(file.path);
       setState(() {
         _imagePath = file.path;
-        print(_imageServerPath);
+        //print(_imageServerPath);
       });
       _upload(file.path);
     }
@@ -55,11 +55,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     request.files.add(image);
     var response = await request.send();
     var resp = await response.stream.bytesToString();
-    print(resp);
+    //print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
       _imageServerPath = respJson['data']['path'];
-      print(_imageServerPath);
+      //print(_imageServerPath);
     });
   }
 
@@ -72,29 +72,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("Edit Profile"),
+        title: const Text("Edit Profile"),
         centerTitle: true,
       ),
       body: FutureBuilder(
           future: MyUserService().myUserPost(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
-              Map userData = snapshot.data!;
+              //Map userData = snapshot.data!;
               return SingleChildScrollView(
                 child: Center(
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
-                              backgroundColor: Color(0xfff25723),
+                              backgroundColor: const Color(0xfff25723),
                               context: context,
                               builder: (context) {
                                 return Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
@@ -103,14 +103,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           onPressed: () {
                                             captureImageFromGallery();
                                           },
-                                          child: Text("Capture Gallery",
+                                          child: const Text("Capture Gallery",
                                               style: TextStyle(
                                                   color: Colors.white))),
                                       TextButton(
                                           onPressed: () {
                                             captureImageFromCamera();
                                           },
-                                          child: Text("Capture  Camera",
+                                          child: const Text("Capture  Camera",
                                               style: TextStyle(
                                                   color: Colors.white)))
                                     ],
@@ -136,7 +136,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(20, 24, 20, 4),
+                        margin: const EdgeInsets.fromLTRB(20, 24, 20, 4),
                         child: Form(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,7 +148,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   TextField(
                                       controller: _nameCtrl,
                                       keyboardType: TextInputType.name,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         labelText: "Full Name",
                                         labelStyle: TextStyle(
                                             fontSize: 14, color: Colors.grey),
@@ -157,13 +157,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               width: 1, color: Colors.grey),
                                         ),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 12,
                                   ),
                                   TextField(
                                       controller: _emailCtrl,
                                       keyboardType: TextInputType.emailAddress,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         labelText: "Email Address",
                                         labelStyle: TextStyle(
                                             fontSize: 14, color: Colors.grey),
@@ -172,13 +172,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               width: 1, color: Colors.grey),
                                         ),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 12,
                                   ),
                                   TextField(
                                       controller: _mobileCtrl,
                                       keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         labelText: "Mobile Number",
                                         labelStyle: TextStyle(
                                             fontSize: 14, color: Colors.grey),
@@ -187,7 +187,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               width: 1, color: Colors.grey),
                                         ),
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 28,
                                   ),
                                   SizedBox(
@@ -195,12 +195,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color(0xfff25723),
-                                        shape: BeveledRectangleBorder(),
+                                        primary: const Color(0xfff25723),
+                                        shape: const BeveledRectangleBorder(),
                                       ),
                                       child: _isLoading
                                           ? CirculatorManager().formUpdate()
-                                          : Text("Update Profile",
+                                          : const Text("Update Profile",
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 16,
@@ -215,22 +215,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 : '${widget.data['imgURL']}');
                                         MyUserService()
                                             .myUserPatch(context, userData);
-                                        //Navigator.pushReplacementNamed(
-                                        // context, '/');
-                                        //Navigator.pop(context);
                                         if (_isLoading) return;
                                         setState(() {
                                           _isLoading = true;
                                         });
                                         await Future.delayed(
-                                            Duration(seconds: 3));
+                                            const Duration(seconds: 3));
                                         setState(() {
                                           _isLoading = false;
                                         });
                                       },
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 24,
                                   ),
                                   TextButton(
@@ -239,7 +236,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             context, '/login',
                                             arguments: {});
                                       },
-                                      child: Text("Logout",
+                                      child: const Text("Logout",
                                           style: TextStyle(
                                               color: Color(0xfff25723),
                                               fontSize: 15,
@@ -256,7 +253,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               );
             }
             if (snapshot.hasError) {
-              print(snapshot.hasError);
+              //print(snapshot.hasError);
               return const Center(child: Text("Something went wrong :( "));
             }
             return CirculatorManager().circleUpdate();

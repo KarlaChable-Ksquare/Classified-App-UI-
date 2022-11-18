@@ -21,18 +21,15 @@ class RouterGenerator {
 
       case '/login':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: LoginScreen()));
+            builder: (context) => const SafeArea(child: LoginScreen()));
 
       case '/register':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: RegisterScreen()));
+            builder: (context) => const SafeArea(child: RegisterScreen()));
 
       case '/settings':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(
-                child: SettingScreen(
-                    //data: args,
-                    )));
+            builder: (context) => SafeArea(child: SettingScreen()));
 
       case '/editprofile':
         return MaterialPageRoute(
@@ -47,7 +44,7 @@ class RouterGenerator {
 
       case '/createad':
         return MaterialPageRoute(
-            builder: (context) => SafeArea(child: CreateAdScreen()));
+            builder: (context) => const SafeArea(child: CreateAdScreen()));
 
       case '/editad':
         return MaterialPageRoute(

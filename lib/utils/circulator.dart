@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 
 class CirculatorManager {
   circleUpdate() {
-    return Center(
+    return const Center(
       child: SizedBox(
           child: CircularProgressIndicator(
               backgroundColor: Colors.black, color: Color(0xfff25723))),
     );
   }
-
-  /*
-  Center(
-                    child: CircularProgressIndicator(
-                        backgroundColor: Colors.black,
-                        color: Color(0xfff25723)))
-  */
 
   formUpdate() {
     return SizedBox(
@@ -22,9 +15,9 @@ class CirculatorManager {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CircularProgressIndicator(
+          const CircularProgressIndicator(
               backgroundColor: Colors.white, color: Colors.black),
-          Text('Please Wait')
+          const Text('Please Wait')
         ],
       ),
     );

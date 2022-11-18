@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
 class EditAdScreen extends StatefulWidget {
@@ -17,10 +17,11 @@ class EditAdScreen extends StatefulWidget {
 }
 
 class _EditAdScreenState extends State<EditAdScreen> {
-  TextEditingController _titleCtrl = TextEditingController();
-  TextEditingController _priceCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
-  TextEditingController _descriptionCtrl = TextEditingController();
+  final TextEditingController _titleCtrl = TextEditingController();
+  final TextEditingController _priceCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
+  final TextEditingController _descriptionCtrl = TextEditingController();
+  bool _isLoading = false;
 
   List<dynamic> _imagePath = [];
   List<String> _imageServerPath = [];
@@ -42,46 +43,44 @@ class _EditAdScreenState extends State<EditAdScreen> {
     });
     var response = await request.send();
     var resp = await response.stream.bytesToString();
-    print(resp);
+    //print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
       _imagePath = respJson['data']['path'];
       _imageServerPath = _imagePath.map((str) => str.toString()).toList();
-      print(_imageServerPath);
+      //print(_imageServerPath);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    //var authorName = widget.data['authorName'];
     _titleCtrl.text = widget.data['title'];
     _priceCtrl.text = widget.data['price'].toString();
     _mobileCtrl.text = widget.data['mobile'];
     _descriptionCtrl.text = widget.data['description'];
-    print('Data: ${widget.data}');
 
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("Edit Ad"),
+          title: const Text("Edit Ad"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
-                        backgroundColor: Color(0xfff25723),
+                        backgroundColor: const Color(0xfff25723),
                         context: context,
                         builder: (context) {
                           return Container(
-                            padding: EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(12),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -89,7 +88,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                     onPressed: () {
                                       captureImageFromGallery();
                                     },
-                                    child: Text("Capture Gallery",
+                                    child: const Text("Capture Gallery",
                                         style: TextStyle(color: Colors.white))),
                               ],
                             ),
@@ -126,71 +125,69 @@ class _EditAdScreenState extends State<EditAdScreen> {
                   height: 105,
                   width: double.infinity,
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
+                    margin: const EdgeInsets.fromLTRB(20, 24, 20, 0),
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: _imageServerPath.isNotEmpty
                             ? _imageServerPath.length
                             : widget.data['images'].length,
                         itemBuilder: ((context, index) {
-                          return Container(
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                        backgroundColor:
-                                            Color.fromRGBO(242, 87, 35, 0.4),
-                                        context: context,
-                                        builder: (context) {
-                                          return Container(
-                                            padding: EdgeInsets.all(12),
-                                            child: SizedBox(
-                                              child: Image.network(
-                                                _imageServerPath.isNotEmpty
-                                                    ? "${_imageServerPath[index]}"
-                                                    : "${widget.data['images'][index]}",
-                                                fit: BoxFit.cover,
-                                              ),
-                                              height: 548,
-                                              width: double.infinity,
+                          return Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                      backgroundColor: const Color.fromRGBO(
+                                          242, 87, 35, 0.4),
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                          padding: const EdgeInsets.all(12),
+                                          child: SizedBox(
+                                            child: Image.network(
+                                              _imageServerPath.isNotEmpty
+                                                  ? "${_imageServerPath[index]}"
+                                                  : "${widget.data['images'][index]}",
+                                              fit: BoxFit.cover,
                                             ),
-                                          );
-                                        });
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
-                                    height: 80,
-                                    width: 88,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(
-                                        color: Colors.grey.shade500,
-                                        width: 1,
-                                      ),
+                                            height: 548,
+                                            width: double.infinity,
+                                          ),
+                                        );
+                                      });
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                  height: 80,
+                                  width: 88,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    border: Border.all(
+                                      color: Colors.grey.shade500,
+                                      width: 1,
                                     ),
-                                    child: Container(
-                                      padding: EdgeInsets.all(4),
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      child: Image.network(
-                                        _imageServerPath.isNotEmpty
-                                            ? _imageServerPath[index]
-                                            : widget.data['images'][index],
-                                        fit: BoxFit.cover,
-                                      ),
+                                  ),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                    child: Image.network(
+                                      _imageServerPath.isNotEmpty
+                                          ? _imageServerPath[index]
+                                          : widget.data['images'][index],
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           );
                         })),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 24, 20, 4),
+                  margin: const EdgeInsets.fromLTRB(20, 24, 20, 4),
                   child: Form(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -202,7 +199,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                             TextField(
                                 controller: _titleCtrl,
                                 keyboardType: TextInputType.name,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Title",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -211,13 +208,13 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _priceCtrl,
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Price",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -226,13 +223,13 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _mobileCtrl,
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Contact Number",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -241,14 +238,14 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _descriptionCtrl,
                                 keyboardType: TextInputType.text,
                                 maxLines: 4,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Description",
                                   alignLabelWithHint: true,
                                   labelStyle: TextStyle(
@@ -258,41 +255,49 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(
                               height: 56,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xfff25723),
-                                    shape: BeveledRectangleBorder(),
-                                  ),
-                                  onPressed: () {
-                                    var ad = AdsModel(
-                                        authorName: widget.data['authorName'],
-                                        sId: widget.data['id'],
-                                        title: _titleCtrl.text,
-                                        mobile: _mobileCtrl.text,
-                                        price: num.parse(_priceCtrl.text),
-                                        description: _descriptionCtrl.text,
-                                        images: _imageServerPath.isNotEmpty
-                                            ? _imageServerPath
-                                            : widget.data['images']);
-                                    print(ad.toJson());
-                                    GetAllAds().patchPost(ad);
-                                    //Navigator.pop(context);
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      '/',
-                                    );
-                                  },
-                                  child: Text("Submit Ad",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold))),
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color(0xfff25723),
+                                  shape: const BeveledRectangleBorder(),
+                                ),
+                                child: _isLoading
+                                    ? CirculatorManager().formUpdate()
+                                    : const Text("Submit Ad",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                onPressed: () async {
+                                  var ad = AdsModel(
+                                      authorName: widget.data['authorName'],
+                                      sId: widget.data['id'],
+                                      title: _titleCtrl.text,
+                                      mobile: _mobileCtrl.text,
+                                      price: num.parse(_priceCtrl.text),
+                                      description: _descriptionCtrl.text,
+                                      images: _imageServerPath.isNotEmpty
+                                          ? _imageServerPath
+                                          : widget.data['images']);
+                                  //print(ad.toJson());
+                                  GetAllAds().patchPost(ad);
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await Future.delayed(
+                                      const Duration(seconds: 3));
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
                           ],
                         ),

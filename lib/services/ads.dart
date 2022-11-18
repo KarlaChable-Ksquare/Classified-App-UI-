@@ -22,7 +22,7 @@ class GetAllAds {
   }
 
   Future<List<AdsModel>> fetchMyPosts() async {
-    var storage = FlutterSecureStorage();
+    var storage = const FlutterSecureStorage();
     List<AdsModel> ads = [];
     var resp = await MyAdsProvider().post('/ads/user', {});
     var postData = resp['data'];
@@ -32,11 +32,11 @@ class GetAllAds {
 
   void createPost(AdsModel ad) async {
     var resp = await MyAdsProvider().post('/ads', ad.toJson());
-    print(resp['data']);
+    //print(resp['data']);
   }
 
   void patchPost(AdsModel ad) async {
     var resp = await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson());
-    print(resp['data']);
+    //print(resp['data']); //respuesta al hacer patch
   }
 }

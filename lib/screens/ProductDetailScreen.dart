@@ -21,8 +21,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   showCustomSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      duration: Duration(seconds: 2),
-      backgroundColor: Color.fromRGBO(242, 87, 35, 1),
+      duration: const Duration(seconds: 2),
+      backgroundColor: const Color.fromRGBO(242, 87, 35, 1),
       content: Text("${widget.data['authorName']}"),
       action: SnackBarAction(
         label: "${widget.data['mobile']}",
@@ -56,14 +56,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("Product Detail"),
+          title: const Text("Product Detail"),
           centerTitle: true,
         ),
         body: Center(
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(20, 20, 20, 5),
+                margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,28 +72,28 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 64,
                           child: Text(
                             "${widget.data['title']}",
                             textAlign: TextAlign.left,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 28,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Text(
                           "\$ ${widget.data['price']}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16,
                               color: Color.fromRGBO(239, 152, 21, 1),
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -117,24 +117,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   );
                                 },
                               ),
-                              // child: FadeInImage(
-                              //   placeholder: NetworkImage(
-                              //       'https://i.ibb.co/CbJyRbH/Lilie.jpg'),
-                              //   image: NetworkImage(
-                              //       "${widget.data['images'][0]}" ?? ""),
-                              //   imageErrorBuilder:
-                              //       (context, error, stackTrace) {
-                              //     return Image.asset(
-                              //       'images/gween.jpg',
-                              //       height: double.infinity,
-                              //       fit: BoxFit.cover,
-                              //     );
-                              //   },
-                              // ),
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Row(
@@ -142,42 +128,41 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.person_outline),
-                                  Text("- All"),
+                                  const Icon(Icons.person_outline),
+                                  const Text("- All"),
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 24,
                             ),
                             Container(
                               child: Row(
                                 children: [
-                                  Icon(Icons.access_time),
+                                  const Icon(Icons.access_time),
                                   Text(
                                       "-${calculateTime(createAt).toString()} - Days ago")
-                                  //Text("-${DateTime.parse(widget.data['createdAt']).year}")
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
                         SizedBox(
                           width: double.infinity,
                           child: Text(
                             "${widget.data['description']}",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
                               height: 1.4,
                             ),
-                            strutStyle: StrutStyle(),
+                            strutStyle: const StrutStyle(),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 24,
                         ),
                         SizedBox(
@@ -185,13 +170,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           width: double.infinity,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xfff25723),
+                                backgroundColor: const Color(0xfff25723),
                                 shape: BeveledRectangleBorder(),
                               ),
                               onPressed: () {
                                 showCustomSnackBar();
                               },
-                              child: Text("Contact Seller",
+                              child: const Text("Contact Seller",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,

@@ -7,7 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class MyUserService {
   Future<Map> myUserPost() async {
-    var storage = FlutterSecureStorage();
+    var storage = const FlutterSecureStorage();
     Map userData;
     var url = Uri.parse("${Constants().serverUrl}/user/profile");
     var token = await storage.read(key: 'token');
@@ -36,7 +36,7 @@ class MyUserService {
   }
 
   Future<Map> myUserPatch(context, UserModel user) async {
-    var storage = FlutterSecureStorage();
+    var storage = const FlutterSecureStorage();
     Map userData;
     var url = Uri.parse("${Constants().serverUrl}/user");
     var token = await storage.read(key: 'token');
@@ -48,7 +48,7 @@ class MyUserService {
       },
       body: jsonEncode(user.toJson()),
     );
-    print(resp.statusCode);
+    //print(resp.statusCode);
     if (resp.statusCode == 401) {
       print("invalid request");
     }
@@ -58,15 +58,15 @@ class MyUserService {
     if (resp.statusCode == 500) {
       print("Server Error");
     }
-    print(resp.body);
+    //print(resp.body);
 
     var respJson = jsonDecode(resp.body);
     var patchData = respJson['data'];
     userData = patchData;
-    print(userData);
+    //print(userData);
 
     if (respJson['status'] == true) {
-      AlertManager().displaySnackbarSuccess(context, 'Successful Update');
+      AlertManager().displaySnackbarSuccess(context, 'Successful Update Add');
     }
     if (respJson['status'] == false) {
       AlertManager()

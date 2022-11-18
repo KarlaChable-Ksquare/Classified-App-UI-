@@ -18,7 +18,7 @@ class _SettingScreenState extends State<SettingScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      print("Error");
+      //print("Error");
     }
   }
 
@@ -41,7 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   if (snapshot.hasData) {
                     Map userData = snapshot.data!;
                     return Container(
-                      padding: EdgeInsets.fromLTRB(0, 4, 24, 28),
+                      padding: const EdgeInsets.fromLTRB(0, 4, 24, 28),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -52,7 +52,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     NetworkImage(userData['imgURL']),
                                 radius: 24,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 12,
                               ),
                               Column(
@@ -63,11 +63,11 @@ class _SettingScreenState extends State<SettingScreen> {
                                         color: Colors.grey.shade800,
                                         fontWeight: FontWeight.bold,
                                       )),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 4,
                                   ),
                                   Text(userData['mobile'],
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
                                       )),
@@ -85,7 +85,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       'imgURL': userData['imgURL'],
                                     });
                               },
-                              child: Text("Edit",
+                              child: const Text("Edit",
                                   style: TextStyle(
                                       color: Color(0xfff25723),
                                       fontWeight: FontWeight.bold))),
@@ -94,7 +94,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     );
                   }
                   if (snapshot.hasError) {
-                    print(snapshot.hasError);
+                    //print(snapshot.hasError);
                     return const Center(
                         child: Text("Something went wrong :( "));
                   }
@@ -106,18 +106,18 @@ class _SettingScreenState extends State<SettingScreen> {
                   Icons.ads_click,
                   color: Colors.grey.shade600,
                 ),
-                SizedBox(width: 28),
+                const SizedBox(width: 28),
                 TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/myads', arguments: {});
                     },
-                    child: Text(
+                    child: const Text(
                       "My Ads",
                       style: TextStyle(color: Color(0xfff25723), fontSize: 16),
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Row(
@@ -126,7 +126,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Icons.person_outline_outlined,
                   color: Colors.grey.shade600,
                 ),
-                SizedBox(width: 28),
+                const SizedBox(width: 28),
                 TextButton(
                     onPressed: () {
                       _openURL("https://appmaking.com/about");
@@ -136,7 +136,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Colors.grey.shade600, fontSize: 16))),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Row(
@@ -145,7 +145,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Icons.contact_page,
                   color: Colors.grey.shade600,
                 ),
-                SizedBox(width: 28),
+                const SizedBox(width: 28),
                 TextButton(
                     onPressed: () {
                       _openURL("https://appmaking.com/contact");

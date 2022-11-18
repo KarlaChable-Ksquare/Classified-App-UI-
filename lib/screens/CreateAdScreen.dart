@@ -5,11 +5,12 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
+import 'package:practice_navigation/utils/circulator.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateAdScreen extends StatefulWidget {
-  CreateAdScreen({
+  const CreateAdScreen({
     super.key,
   });
   @override
@@ -21,11 +22,10 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
   final TextEditingController _priceCtrl = TextEditingController();
   final TextEditingController _mobileCtrl = TextEditingController();
   final TextEditingController _descriptionCtrl = TextEditingController();
+  bool _isLoading = false;
 
   final List<String> _randomPics = [
     'https://picsum.photos/200/300',
-    'https://picsum.photos/200/300',
-    'https://picsum.photos/200/300'
   ];
 
   List<dynamic> _imagePath = [];
@@ -48,12 +48,12 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
     });
     var response = await request.send();
     var resp = await response.stream.bytesToString();
-    print(resp);
+    //print(resp);
     var respJson = jsonDecode(resp);
     setState(() {
       _imagePath = respJson['data']['path'];
       _imageServerPath = _imagePath.map((str) => str.toString()).toList();
-      print(_imageServerPath);
+      //print(_imageServerPath);
     });
   }
 
@@ -63,24 +63,24 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("Create Ad"),
+          title: const Text("Create Ad"),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 GestureDetector(
                   onTap: () {
                     showModalBottomSheet(
-                        backgroundColor: Color(0xfff25723),
+                        backgroundColor: const Color(0xfff25723),
                         context: context,
                         builder: (context) {
                           return Container(
-                            padding: EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(12),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -88,7 +88,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                     onPressed: () {
                                       captureImageFromGallery();
                                     },
-                                    child: Text("Capture Gallery",
+                                    child: const Text("Capture Gallery",
                                         style: TextStyle(color: Colors.white))),
                               ],
                             ),
@@ -125,7 +125,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                   height: _imageServerPath.isNotEmpty ? 105 : 1,
                   width: double.infinity,
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(20, 24, 20, 0),
+                    margin: const EdgeInsets.fromLTRB(20, 24, 20, 0),
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: _imageServerPath.length,
@@ -141,7 +141,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         context: context,
                                         builder: (context) {
                                           return Container(
-                                            padding: EdgeInsets.all(12),
+                                            padding: const EdgeInsets.all(12),
                                             child: SizedBox(
                                               child: Image.network(
                                                 "${_imageServerPath[index]}",
@@ -154,7 +154,8 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         });
                                   },
                                   child: Container(
-                                    margin: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                    margin:
+                                        const EdgeInsets.fromLTRB(4, 0, 4, 0),
                                     height: 80,
                                     width: 88,
                                     alignment: Alignment.center,
@@ -166,7 +167,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                       ),
                                     ),
                                     child: Container(
-                                      padding: EdgeInsets.all(4),
+                                      padding: const EdgeInsets.all(4),
                                       height: double.infinity,
                                       width: double.infinity,
                                       child: Image.network(
@@ -183,7 +184,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 36, 20, 4),
+                  margin: const EdgeInsets.fromLTRB(20, 36, 20, 4),
                   child: Form(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,7 +196,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                             TextField(
                                 controller: _titleCtrl,
                                 keyboardType: TextInputType.name,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Title",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -204,13 +205,13 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _priceCtrl,
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Price",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -219,13 +220,13 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _mobileCtrl,
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Contact Number",
                                   labelStyle: TextStyle(
                                       fontSize: 14, color: Colors.grey),
@@ -234,14 +235,14 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextField(
                                 controller: _descriptionCtrl,
                                 keyboardType: TextInputType.text,
                                 maxLines: 4,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Description",
                                   alignLabelWithHint: true,
                                   labelStyle: TextStyle(
@@ -251,38 +252,46 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                         width: 1, color: Colors.grey),
                                   ),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SizedBox(
                               height: 56,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xfff25723),
-                                    shape: BeveledRectangleBorder(),
-                                  ),
-                                  onPressed: () {
-                                    var ad = AdsModel(
-                                        title: _titleCtrl.text,
-                                        mobile: _mobileCtrl.text,
-                                        price: num.parse(_priceCtrl.text),
-                                        description: _descriptionCtrl.text,
-                                        images: _imageServerPath.length > 0
-                                            ? _imageServerPath
-                                            : _randomPics);
-                                    print(ad.toJson());
-                                    GetAllAds().createPost(ad);
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      '/',
-                                    );
-                                  },
-                                  child: Text("Submit Ad",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold))),
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color(0xfff25723),
+                                  shape: const BeveledRectangleBorder(),
+                                ),
+                                child: _isLoading
+                                    ? CirculatorManager().formUpdate()
+                                    : const Text("Submit Ad",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                onPressed: () async {
+                                  var ad = AdsModel(
+                                      title: _titleCtrl.text,
+                                      mobile: _mobileCtrl.text,
+                                      price: num.parse(_priceCtrl.text),
+                                      description: _descriptionCtrl.text,
+                                      images: _imageServerPath.isNotEmpty
+                                          ? _imageServerPath
+                                          : _randomPics);
+                                  GetAllAds().createPost(ad);
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await Future.delayed(
+                                      const Duration(seconds: 3));
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ),
                             ),
                           ],
                         ),

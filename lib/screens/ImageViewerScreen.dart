@@ -37,7 +37,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
             height: double.infinity,
             color: Colors.black,
             child: Container(
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: Image.network(
                 widget.data['images'][itemIndex],
                 fit: BoxFit.cover,

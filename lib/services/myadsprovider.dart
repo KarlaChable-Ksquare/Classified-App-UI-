@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:http/http.dart' as http;
 
 class MyAdsProvider {
-  var storage = FlutterSecureStorage();
+  var storage = const FlutterSecureStorage();
 
   Future<String> _getToken() async {
     var token = await storage.read(key: 'token');
@@ -29,6 +30,13 @@ class MyAdsProvider {
         body: jsonEncode(body),
       );
       responseJson = _handleResponse(response);
+      //print(responseJson['status']);
+      if (responseJson['status'] == true) {
+        AlertManager().snackbarSuccessAd("Successful Ad Creation");
+      }
+      if (responseJson['status'] == false) {
+        AlertManager().snackbarErrorAd("Error ${response.statusCode}");
+      }
     } catch (e) {
       print("error");
       print(e);
@@ -47,6 +55,14 @@ class MyAdsProvider {
         body: jsonEncode(body),
       );
       responseJson = _handleResponse(response);
+      //print(responseJson);
+      //print(responseJson['status']);
+      if (responseJson['status'] == true) {
+        AlertManager().snackbarSuccessAd("Successful Ad Uppdate");
+      }
+      if (responseJson['status'] == false) {
+        AlertManager().snackbarErrorAd("Error ${response.statusCode}");
+      }
     } catch (e) {
       print("error");
       print(e);

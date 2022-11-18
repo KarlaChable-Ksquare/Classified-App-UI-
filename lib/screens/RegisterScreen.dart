@@ -11,12 +11,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController _nameCtrl = TextEditingController();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
-  TextEditingController _passwordCtrl = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _mobileCtrl = TextEditingController();
+  final TextEditingController _passwordCtrl = TextEditingController();
   var _formKey = GlobalKey<FormState>();
-
   bool _isLoading = false;
 
   @override
@@ -33,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Image.asset("images/merida.png", fit: BoxFit.cover),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 30, 20, 5),
+                  margin: const EdgeInsets.fromLTRB(20, 30, 20, 5),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -53,16 +52,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Full Name",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.person,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextFormField(
@@ -75,16 +74,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Email Address",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.email,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextFormField(
@@ -97,16 +96,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Mobile Number",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.phone,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextFormField(
@@ -122,16 +121,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 },
                                 decoration: InputDecoration(
                                   labelText: "Password",
-                                  labelStyle: TextStyle(
+                                  labelStyle: const TextStyle(
                                       fontSize: 16, color: Colors.grey),
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         width: 1, color: Colors.grey),
                                   ),
                                   prefixIcon: Icon(Icons.password,
                                       color: Colors.grey.shade300),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             SizedBox(
@@ -139,12 +138,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: Color(0xfff25723),
-                                  shape: BeveledRectangleBorder(),
+                                  backgroundColor: const Color(0xfff25723),
+                                  shape: const BeveledRectangleBorder(),
                                 ),
                                 child: _isLoading
                                     ? CirculatorManager().formUpdate()
-                                    : Text("Register Now",
+                                    : const Text("Register Now",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -163,21 +162,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     _isLoading = true;
                                   });
                                   await Future.delayed(
-                                      const Duration(milliseconds: 1500));
+                                      const Duration(seconds: 3));
                                   setState(() {
                                     _isLoading = false;
                                   });
                                 },
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/login');
                                 },
-                                child: Text("Already have an account?",
+                                child: const Text("Already have an account?",
                                     style: TextStyle(
                                         color: Color.fromRGBO(242, 87, 35, 1),
                                         fontSize: 12,
