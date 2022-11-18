@@ -279,7 +279,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                       images: _imageServerPath.isNotEmpty
                                           ? _imageServerPath
                                           : _randomPics);
-                                  GetAllAds().createPost(ad);
+                                  GetAllAds().createPost(context, ad);
                                   if (_isLoading) return;
                                   setState(() {
                                     _isLoading = true;

@@ -20,7 +20,7 @@ class MyAdsProvider {
     };
   }
 
-  Future post(endpoint, body) async {
+  Future post(endpoint, body, context) async {
     var responseJson;
     var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
     try {
@@ -30,12 +30,13 @@ class MyAdsProvider {
         body: jsonEncode(body),
       );
       responseJson = _handleResponse(response);
-      //print(responseJson['status']);
       if (responseJson['status'] == true) {
-        AlertManager().snackbarSuccessAd("Successful Ad Creation");
+        AlertManager()
+            .displaySnackbarSuccess(context, "Successful Ad Creation");
       }
       if (responseJson['status'] == false) {
-        AlertManager().snackbarErrorAd("Error ${response.statusCode}");
+        AlertManager()
+            .displaySnackbarError(context, "Error ${response.statusCode}");
       }
     } catch (e) {
       print("error");
@@ -45,7 +46,7 @@ class MyAdsProvider {
     return responseJson;
   }
 
-  Future patch(endpoint, body) async {
+  Future patch(endpoint, body, context) async {
     var responseJson;
     var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
     try {
@@ -58,10 +59,11 @@ class MyAdsProvider {
       //print(responseJson);
       //print(responseJson['status']);
       if (responseJson['status'] == true) {
-        AlertManager().snackbarSuccessAd("Successful Ad Uppdate");
+        AlertManager().displaySnackbarSuccess(context, "Successful Ad Uppdate");
       }
       if (responseJson['status'] == false) {
-        AlertManager().snackbarErrorAd("Error ${response.statusCode}");
+        AlertManager()
+            .displaySnackbarError(context, "Error ${response.statusCode}");
       }
     } catch (e) {
       print("error");

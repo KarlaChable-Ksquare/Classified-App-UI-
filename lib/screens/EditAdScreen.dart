@@ -285,7 +285,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                           ? _imageServerPath
                                           : widget.data['images']);
                                   //print(ad.toJson());
-                                  GetAllAds().patchPost(ad);
+                                  GetAllAds().patchPost(ad, context);
                                   if (_isLoading) return;
                                   setState(() {
                                     _isLoading = true;

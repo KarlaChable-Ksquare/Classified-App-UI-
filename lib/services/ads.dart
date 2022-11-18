@@ -24,19 +24,31 @@ class GetAllAds {
   Future<List<AdsModel>> fetchMyPosts() async {
     var storage = const FlutterSecureStorage();
     List<AdsModel> ads = [];
-    var resp = await MyAdsProvider().post('/ads/user', {});
-    var postData = resp['data'];
-    ads = postData.map<AdsModel>((ad) => AdsModel.fromJson(ad)).toList();
-    return ads;
+    var url = Uri.parse("${Constants().serverUrl}/ads/user");
+    var token = await storage.read(key: 'token');
+    try {
+      var resp = await http.post(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      });
+      var resAsJSON = jsonDecode(resp.body);
+      var adData = resAsJSON['data'];
+      ads = adData.map<AdsModel>((ad) => AdsModel.fromJson(ad)).toList();
+      return ads;
+    } catch (e) {
+      print("$e");
+      return ads;
+    }
   }
 
-  void createPost(AdsModel ad) async {
-    var resp = await MyAdsProvider().post('/ads', ad.toJson());
+  void createPost(context, AdsModel ad) async {
+    var resp = await MyAdsProvider().post('/ads', ad.toJson(), context);
     //print(resp['data']);
   }
 
-  void patchPost(AdsModel ad) async {
-    var resp = await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson());
+  void patchPost(AdsModel ad, context) async {
+    var resp =
+        await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson(), context);
     //print(resp['data']); //respuesta al hacer patch
   }
 }
