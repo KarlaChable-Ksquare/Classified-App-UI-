@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: GetAllAds().fetchUserData(),
+              future: GetAllAds().fetchUserPosts(),
               builder: ((context, snapshot) {
                 if (snapshot.hasData) {
                   List<AdsModel> ads = snapshot.data!;

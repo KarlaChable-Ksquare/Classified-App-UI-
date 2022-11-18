@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AlertManager {
   displaySnackbarError(context, message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -26,6 +27,7 @@ class AlertManager {
 
   displaySnackbarSuccess(context, message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,6 +54,7 @@ class AlertManager {
 
   displaySnackRegisterTrue(context, message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -78,6 +81,7 @@ class AlertManager {
 
   displaySnackRegisterFalse(context, message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
         content: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

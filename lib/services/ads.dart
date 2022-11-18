@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:practice_navigation/model/ads.dart';
-import 'package:practice_navigation/services/myadsprovider.dart';
+import 'package:practice_navigation/services/adsprovider.dart';
 import 'package:practice_navigation/utils/contants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class GetAllAds {
-  Future<List<AdsModel>> fetchUserData() async {
+  Future<List<AdsModel>> fetchUserPosts() async {
     List<AdsModel> ads = [];
     var url = Uri.parse("${Constants().serverUrl}/ads");
     try {
@@ -36,7 +36,7 @@ class GetAllAds {
       ads = adData.map<AdsModel>((ad) => AdsModel.fromJson(ad)).toList();
       return ads;
     } catch (e) {
-      print("$e");
+      print("Error $e");
       return ads;
     }
   }
@@ -50,5 +50,11 @@ class GetAllAds {
     var resp =
         await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson(), context);
     //print(resp['data']); //respuesta al hacer patch
+  }
+
+  void deletePost(AdsModel ad, context) async {
+    var resp =
+        await MyAdsProvider().delete('/ads/${ad.sId}', ad.toJson(), context);
+    //print(resp['data']);
   }
 }

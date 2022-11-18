@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/utils/contants.dart';
@@ -70,6 +71,33 @@ class MyAdsProvider {
       print(e);
     }
     //print(responseJson);
+    return responseJson;
+  }
+
+  Future delete(endpoint, body, context) async {
+    var responseJson;
+    var requestURL = Uri.parse("${Constants().serverUrl}$endpoint");
+    try {
+      var response = await http.delete(
+        requestURL,
+        headers: await _getHeaders(),
+        body: jsonEncode(body),
+      );
+      responseJson = _handleResponse(response);
+      //print(responseJson);
+      print('${responseJson['status']} Deleted Data');
+      if (responseJson['status'] == true) {
+        AlertManager().displaySnackbarSuccess(context, "Successful Ad Deleted");
+        Navigator.pushNamed(context, '/');
+      }
+      if (responseJson['status'] == false) {
+        AlertManager()
+            .displaySnackbarError(context, "Error ${response.statusCode}");
+      }
+    } catch (e) {
+      print("error");
+      print(e);
+    }
     return responseJson;
   }
 

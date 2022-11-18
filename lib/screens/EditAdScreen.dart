@@ -65,6 +65,44 @@ class _EditAdScreenState extends State<EditAdScreen> {
           backgroundColor: Colors.black,
           title: const Text("Edit Ad"),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () {
+                showDialog(
+                    barrierColor: Color.fromRGBO(242, 87, 35, 0.35),
+                    context: context,
+                    builder: ((context) {
+                      return AlertDialog(
+                        title: Text("Delete AD"),
+                        content: Text("Do you want delete this Ad?"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                var ad = AdsModel(
+                                    authorName: widget.data['authorName'],
+                                    sId: widget.data['id'],
+                                    title: _titleCtrl.text,
+                                    mobile: _mobileCtrl.text,
+                                    price: num.parse(_priceCtrl.text),
+                                    description: _descriptionCtrl.text,
+                                    images: _imageServerPath.isNotEmpty
+                                        ? _imageServerPath
+                                        : widget.data['images']);
+                                GetAllAds().deletePost(ad, context);
+                              },
+                              child: Text("Yes")),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("No"))
+                        ],
+                      );
+                    }));
+              },
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -263,7 +301,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: const Color(0xfff25723),
+                                  backgroundColor: const Color(0xfff25723),
                                   shape: const BeveledRectangleBorder(),
                                 ),
                                 child: _isLoading
