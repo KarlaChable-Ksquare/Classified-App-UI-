@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
 
 class MyAdsScreenCard extends StatelessWidget {
   String id;
@@ -90,13 +91,8 @@ class MyAdsScreenCard extends StatelessWidget {
                             Icons.access_time,
                             size: 12,
                           ),
-                          Text(
-                            "-${calculateTime(createAt).toString()} - Days ago",
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                          ),
+                          TextStyles().detailTime(
+                              "-${calculateTime(createAt).toString()} - Days ago"),
                         ],
                       ),
                       const SizedBox(
