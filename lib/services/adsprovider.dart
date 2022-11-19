@@ -35,7 +35,7 @@ class MyAdsProvider {
         AlertManager()
             .displaySnackbarSuccess(context, "Successful Ad Creation");
         //Navigator.pop(context);
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/settings');
       }
       if (responseJson['status'] == false) {
         AlertManager()
@@ -88,10 +88,11 @@ class MyAdsProvider {
       );
       responseJson = _handleResponse(response);
       //print(responseJson);
-      print('${responseJson['status']} Deleted Data');
+      //print('${responseJson['status']} Deleted Data');
       if (responseJson['status'] == true) {
         AlertManager().displaySnackbarSuccess(context, "Successful Ad Deleted");
-        Navigator.pushNamed(context, '/settings');
+        Navigator.pushNamed(context, '/myads');
+        //Navigator.pop(context);
       }
       if (responseJson['status'] == false) {
         AlertManager()

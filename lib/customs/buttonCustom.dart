@@ -20,4 +20,20 @@ class ButtonCustom {
       ),
     );
   }
+
+  backSetting(context) {
+    return IconButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/settings');
+        },
+        icon: Icon(Icons.arrow_back));
+  }
+
+  backHome(context) {
+    return IconButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/');
+        },
+        icon: Icon(Icons.arrow_back));
+  }
 }

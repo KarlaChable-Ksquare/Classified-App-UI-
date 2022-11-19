@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/customs/buttonCustom.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
 import 'package:practice_navigation/custom_widgets/MyAdsScreen_Card.dart';
@@ -14,6 +15,7 @@ class MyAdsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text("My Ads"),
+        leading: ButtonCustom().backSetting(context),
       ),
       body: Column(children: [
         Expanded(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/customs/buttonCustom.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
 import 'package:practice_navigation/services/myuser.dart';
@@ -31,6 +32,7 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text("Setting Screen"),
+        leading: ButtonCustom().backHome(context),
       ),
       body: Container(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
