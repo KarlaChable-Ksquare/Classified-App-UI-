@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:practice_navigation/customs/buttonCustom.dart';
 import 'package:practice_navigation/model/user.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
-import 'package:practice_navigation/utils/circulator.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -80,7 +82,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           future: MyUserService().myUserPost(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
-              //Map userData = snapshot.data!;
               return SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -104,16 +105,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           onPressed: () {
                                             captureImageFromGallery();
                                           },
-                                          child: const Text("Capture Gallery",
-                                              style: TextStyle(
-                                                  color: Colors.white))),
+                                          child: TextStyles().captureGallery()),
                                       TextButton(
                                           onPressed: () {
                                             captureImageFromCamera();
                                           },
-                                          child: const Text("Capture  Camera",
-                                              style: TextStyle(
-                                                  color: Colors.white)))
+                                          child: TextStyles().captureCamera())
                                     ],
                                   ),
                                 );
@@ -195,18 +192,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     height: 56,
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xfff25723),
-                                        shape: const BeveledRectangleBorder(),
-                                      ),
-                                      child: _isLoading
-                                          ? CirculatorManager().formUpdate()
-                                          : const Text("Update Profile",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold)),
+                                      style: ButtonCustom().elevButton(),
+                                      child: CirculatorManager()
+                                          .isLoadingProfile(_isLoading),
                                       onPressed: () async {
                                         var userData = UserModel(
                                             name: _nameCtrl.text,
@@ -237,11 +225,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         Navigator.pushReplacementNamed(
                                             context, '/login');
                                       },
-                                      child: const Text("Logout",
-                                          style: TextStyle(
-                                              color: Color(0xfff25723),
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold)))
+                                      child: TextStyles().logoutAcount())
                                 ],
                               ),
                             ],

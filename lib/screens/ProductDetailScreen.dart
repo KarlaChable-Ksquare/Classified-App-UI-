@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:practice_navigation/customs/buttonCustom.dart';
+import 'package:practice_navigation/customs/rows.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -15,7 +18,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      //print("Error");
+      print("Error");
     }
   }
 
@@ -96,25 +99,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         const SizedBox(
                           height: 16,
                         ),
-                        SizedBox(
-                          height: 232,
-                          width: double.infinity,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/imageviewer',
-                                  arguments: {
-                                    'images': widget.data['images'],
-                                  });
-                            },
-                            child: Image.network(
-                              pictureRender(),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.network(
-                                  "https://i.ibb.co/CbJyRbH/Lilie.jpg",
-                                  fit: BoxFit.cover,
-                                );
+                        Container(
+                          child: SizedBox(
+                            height: 232,
+                            width: double.infinity,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/imageviewer',
+                                    arguments: {
+                                      'images': widget.data['images'],
+                                    });
                               },
+                              child: Image.network(
+                                pictureRender(),
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.network(
+                                    "https://i.ibb.co/CbJyRbH/Lilie.jpg",
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -123,22 +128,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         ),
                         Row(
                           children: [
-                            Row(
-                              children: const [
-                                Icon(Icons.person_outline),
-                                Text("- All"),
-                              ],
-                            ),
+                            Rows().detailAll(),
                             const SizedBox(
                               width: 24,
                             ),
-                            Row(
-                              children: [
-                                const Icon(Icons.access_time),
-                                Text(
-                                    "-${calculateTime(createAt).toString()} - Days ago")
-                              ],
-                            ),
+                            Rows().detailTime(
+                                "-${calculateTime(createAt).toString()} - Days ago"),
                           ],
                         ),
                         const SizedBox(
@@ -153,7 +148,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               color: Colors.black,
                               height: 1.4,
                             ),
-                            strutStyle: const StrutStyle(),
                           ),
                         ),
                         const SizedBox(
@@ -163,18 +157,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           height: 55,
                           width: double.infinity,
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xfff25723),
-                                shape: const BeveledRectangleBorder(),
-                              ),
+                              style: ButtonCustom().elevButton(),
                               onPressed: () {
                                 showCustomSnackBar();
                               },
-                              child: const Text("Contact Seller",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold))),
+                              child: TextStyles().contactSeller()),
                         ),
                       ],
                     ),

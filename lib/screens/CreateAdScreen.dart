@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:practice_navigation/customs/columns.dart';
 import 'package:practice_navigation/model/ads.dart';
-import 'package:practice_navigation/services/ads.dart';
-import 'package:practice_navigation/utils/circulator.dart';
-import 'package:practice_navigation/utils/contants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:practice_navigation/services/ads.dart';
+import 'package:practice_navigation/utils/contants.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
 
 class CreateAdScreen extends StatefulWidget {
   const CreateAdScreen({
@@ -87,8 +89,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                     onPressed: () {
                                       captureImageFromGallery();
                                     },
-                                    child: const Text("Capture Gallery",
-                                        style: TextStyle(color: Colors.white))),
+                                    child: TextStyles().captureGallery()),
                               ],
                             ),
                           );
@@ -104,20 +105,7 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                     ),
                     height: 136,
                     width: 136,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.add_a_photo_outlined,
-                          size: 40,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text("Tap to upload")
-                      ],
-                    ),
+                    child: Columns().addPhoto(),
                   ),
                 ),
                 SizedBox(
@@ -262,13 +250,8 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                   backgroundColor: const Color(0xfff25723),
                                   shape: const BeveledRectangleBorder(),
                                 ),
-                                child: _isLoading
-                                    ? CirculatorManager().formUpdate()
-                                    : const Text("Submit Ad",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                child: CirculatorManager()
+                                    .isLoadingNewAd(_isLoading),
                                 onPressed: () async {
                                   var ad = AdsModel(
                                       title: _titleCtrl.text,
@@ -278,15 +261,15 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                       images: _imageServerPath.isNotEmpty
                                           ? _imageServerPath
                                           : _randomPics);
-                                  GetAllAds().createPost(context, ad);
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 500));
+                                  setState(() {
+                                    GetAllAds().createPost(context, ad);
+                                    _isLoading = false;
+                                  });
                                   if (_isLoading) return;
                                   setState(() {
                                     _isLoading = true;
-                                  });
-                                  await Future.delayed(
-                                      const Duration(seconds: 3));
-                                  setState(() {
-                                    _isLoading = false;
                                   });
                                 },
                               ),

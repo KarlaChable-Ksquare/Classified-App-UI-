@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:practice_navigation/services/myuser.dart';
-import 'package:practice_navigation/utils/circulator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
+import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/customs/rows.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({
@@ -18,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
-      //print("Error");
+      //print("Error _OpenURL");
     }
   }
 
@@ -58,19 +61,12 @@ class _SettingScreenState extends State<SettingScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(userData['name'],
-                                      style: TextStyle(
-                                        color: Colors.grey.shade800,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                  TextStyles().dataUserName(userData['name']),
                                   const SizedBox(
                                     height: 4,
                                   ),
-                                  Text(userData['mobile'],
-                                      style: const TextStyle(
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold,
-                                      )),
+                                  TextStyles()
+                                      .dataUserPhone(userData['mobile']),
                                 ],
                               )
                             ],
@@ -85,18 +81,14 @@ class _SettingScreenState extends State<SettingScreen> {
                                       'imgURL': userData['imgURL'],
                                     });
                               },
-                              child: const Text("Edit",
-                                  style: TextStyle(
-                                      color: Color(0xfff25723),
-                                      fontWeight: FontWeight.bold))),
+                              child: TextStyles().dataUserEdit()),
                         ],
                       ),
                     );
                   }
                   if (snapshot.hasError) {
                     //print(snapshot.hasError);
-                    return const Center(
-                        child: Text("Something went wrong :( "));
+                    AlertManager().errorMessage();
                   }
                   return CirculatorManager().circleUpdate();
                 })),
@@ -109,7 +101,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 const SizedBox(width: 28),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/myads', arguments: {});
+                      Navigator.pushNamed(context, '/myads');
                     },
                     child: const Text(
                       "My Ads",
@@ -120,41 +112,11 @@ class _SettingScreenState extends State<SettingScreen> {
             const SizedBox(
               height: 12,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.person_outline_outlined,
-                  color: Colors.grey.shade600,
-                ),
-                const SizedBox(width: 28),
-                TextButton(
-                    onPressed: () {
-                      _openURL("https://appmaking.com/about");
-                    },
-                    child: Text("About Us",
-                        style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 16))),
-              ],
-            ),
+            Rows().aboutUs(_openURL),
             const SizedBox(
               height: 12,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.contact_page,
-                  color: Colors.grey.shade600,
-                ),
-                const SizedBox(width: 28),
-                TextButton(
-                    onPressed: () {
-                      _openURL("https://appmaking.com/contact");
-                    },
-                    child: Text("Contact Us",
-                        style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 16)))
-              ],
-            ),
+            Rows().contactUs(_openURL)
           ],
         ),
       ),

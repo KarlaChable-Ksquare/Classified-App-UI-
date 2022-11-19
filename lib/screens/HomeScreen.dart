@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:practice_navigation/custom_widgets/HomeScreen_Card.dart';
+import 'package:practice_navigation/customs/buttonCustom.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
 import 'package:practice_navigation/services/myuser.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
 import 'package:practice_navigation/utils/alert_manager.dart';
-import 'package:practice_navigation/utils/circulator.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -81,19 +83,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
-      )
-      //
-      ,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/createad', arguments: {});
-        },
-        backgroundColor: const Color(0xfff25723),
-        elevation: 8,
-        child: const Icon(
-          Icons.add_a_photo_outlined,
-        ),
       ),
+      floatingActionButton: ButtonCustom().floatButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }

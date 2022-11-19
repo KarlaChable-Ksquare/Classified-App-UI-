@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:practice_navigation/custom_widgets/MyAdsScreen_Card.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
-import 'package:practice_navigation/utils/circulator.dart';
+import 'package:practice_navigation/custom_widgets/MyAdsScreen_Card.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
+import 'package:practice_navigation/utils/alert_manager.dart';
 
 class MyAdsScreen extends StatelessWidget {
   const MyAdsScreen({super.key});
@@ -40,7 +41,7 @@ class MyAdsScreen extends StatelessWidget {
               }
               //
               if (snapshot.hasError) {
-                return const Center(child: Text("Something went wrong"));
+                AlertManager().errorMessage();
               }
               return CirculatorManager().circleUpdate();
             }),

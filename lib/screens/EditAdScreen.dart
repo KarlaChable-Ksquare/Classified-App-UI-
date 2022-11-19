@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:practice_navigation/customs/buttonCustom.dart';
+import 'package:practice_navigation/customs/columns.dart';
+import 'package:practice_navigation/customs/textStyles.dart';
 import 'package:practice_navigation/model/ads.dart';
 import 'package:practice_navigation/services/ads.dart';
-import 'package:practice_navigation/utils/circulator.dart';
+import 'package:practice_navigation/customs/circulatorManager.dart';
 import 'package:practice_navigation/utils/contants.dart';
 
 class EditAdScreen extends StatefulWidget {
@@ -94,20 +97,12 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                             : widget.data['images']);
                                     GetAllAds().deletePost(ad, context);
                                   },
-                                  child: const Text(
-                                    "Yes",
-                                    style: TextStyle(
-                                        color: Color(0xfff25723),
-                                        fontWeight: FontWeight.bold),
-                                  )),
+                                  child: TextStyles().deleteAdY()),
                               TextButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: const Text("No",
-                                      style: TextStyle(
-                                          color: Color(0xfff25723),
-                                          fontWeight: FontWeight.bold)))
+                                  child: TextStyles().deleteAdN())
                             ],
                           )
                         ],
@@ -139,8 +134,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                     onPressed: () {
                                       captureImageFromGallery();
                                     },
-                                    child: const Text("Capture Gallery",
-                                        style: TextStyle(color: Colors.white))),
+                                    child: TextStyles().captureGallery()),
                               ],
                             ),
                           );
@@ -156,20 +150,7 @@ class _EditAdScreenState extends State<EditAdScreen> {
                     ),
                     height: 136,
                     width: 136,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.camera_alt_outlined,
-                          size: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text("Tap to upload")
-                      ],
-                    ),
+                    child: Columns().addPhoto(),
                   ),
                 ),
                 SizedBox(
@@ -313,17 +294,9 @@ class _EditAdScreenState extends State<EditAdScreen> {
                               height: 56,
                               width: double.infinity,
                               child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xfff25723),
-                                  shape: const BeveledRectangleBorder(),
-                                ),
-                                child: _isLoading
-                                    ? CirculatorManager().formUpdate()
-                                    : const Text("Submit Ad",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
+                                style: ButtonCustom().elevButton(),
+                                child:
+                                    CirculatorManager().isLoadingAd(_isLoading),
                                 onPressed: () async {
                                   var ad = AdsModel(
                                       sId: widget.data['id'],
@@ -336,15 +309,15 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                           ? _imageServerPath
                                           : widget.data['images']);
                                   //print(ad.toJson());
-                                  GetAllAds().patchPost(ad, context);
+                                  await Future.delayed(
+                                      const Duration(milliseconds: 500));
+                                  setState(() {
+                                    GetAllAds().patchPost(ad, context);
+                                    _isLoading = false;
+                                  });
                                   if (_isLoading) return;
                                   setState(() {
                                     _isLoading = true;
-                                  });
-                                  await Future.delayed(
-                                      const Duration(seconds: 3));
-                                  setState(() {
-                                    _isLoading = false;
                                   });
                                 },
                               ),
