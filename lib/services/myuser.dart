@@ -19,7 +19,6 @@ class MyUserService {
         'Authorization': 'Bearer $token'
       },
     );
-    //print(resp.statusCode);
     if (resp.statusCode == 401) {
       print("invalid request");
     }
@@ -29,7 +28,7 @@ class MyUserService {
     if (resp.statusCode == 500) {
       print("Server Error");
     }
-    //print(resp.body);
+
     var respJson = jsonDecode(resp.body);
     var postData = respJson['data'];
     userData = postData;
@@ -49,7 +48,7 @@ class MyUserService {
       },
       body: jsonEncode(user.toJson()),
     );
-    //print(resp.statusCode);
+
     if (resp.statusCode == 401) {
       print("invalid request");
     }
@@ -59,12 +58,10 @@ class MyUserService {
     if (resp.statusCode == 500) {
       print("Server Error");
     }
-    //print(resp.body);
 
     var respJson = jsonDecode(resp.body);
     var patchData = respJson['data'];
     userData = patchData;
-    //print(userData);
 
     if (respJson['status'] == true) {
       AlertManager().displaySnackbarSuccess(context, 'Successful Update User');

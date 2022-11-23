@@ -92,7 +92,6 @@ class MyAdsProvider {
       if (responseJson['status'] == true) {
         AlertManager().displaySnackbarSuccess(context, "Successful Ad Deleted");
         Navigator.pushNamed(context, '/myads');
-        //Navigator.pop(context);
       }
       if (responseJson['status'] == false) {
         AlertManager()

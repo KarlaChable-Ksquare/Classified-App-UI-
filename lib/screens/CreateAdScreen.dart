@@ -253,6 +253,11 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                 child: CirculatorManager()
                                     .isLoadingNewAd(_isLoading),
                                 onPressed: () async {
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+
                                   var ad = AdsModel(
                                       title: _titleCtrl.text,
                                       mobile: _mobileCtrl.text,
@@ -266,10 +271,6 @@ class _CreateAdScreenState extends State<CreateAdScreen> {
                                   setState(() {
                                     GetAllAds().createPost(context, ad);
                                     _isLoading = false;
-                                  });
-                                  if (_isLoading) return;
-                                  setState(() {
-                                    _isLoading = true;
                                   });
                                 },
                               ),

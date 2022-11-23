@@ -98,6 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             child:
                                 CirculatorManager().isLoadingLogin(_isLoading),
                             onPressed: () async {
+                              if (_isLoading) return;
+                              setState(() {
+                                _isLoading = true;
+                              });
+
                               if (_formKey.currentState!.validate()) {
                                 UserModel user = UserModel(
                                     email: _emailCtrl.text,
@@ -108,11 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   AuthService().login(context, user);
                                   _isLoading = false;
                                 });
+                              } else {
+                                await Future.delayed(
+                                    const Duration(milliseconds: 1000));
+                                setState(() {
+                                  _isLoading = false;
+                                });
                               }
-                              if (_isLoading) return;
-                              setState(() {
-                                _isLoading = true;
-                              });
                             },
                           ),
                         ),

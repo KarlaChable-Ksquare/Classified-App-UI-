@@ -16,6 +16,7 @@ class AuthService {
           headers: {'Content-Type': 'application/json'});
       var respObj = jsonDecode(resp.body);
       //print(respObj['status']);
+      //print(userObj);
 
       if (respObj['status'] == false) {
         AlertManager().displaySnackRegisterFalse(context, respObj['message']);
@@ -33,22 +34,19 @@ class AuthService {
   void login(context, UserModel user) async {
     var storage = const FlutterSecureStorage();
     var url = Uri.parse("${Constants().serverUrl}/auth/login");
-    //print('push en login');
     var userObj = user.toJson();
     try {
       var resp = await http.post(url,
           body: jsonEncode(userObj),
           headers: {'Content-Type': 'application/json'});
       var respObj = jsonDecode(resp.body);
-      //print(respObj['status']);
+
       if (respObj['status'] == false) {
         AlertManager().displaySnackbarError(context, respObj['message']);
       }
       if (respObj['status'] == true) {
         storage.write(key: 'userId', value: respObj['data']['user']['_id']);
         storage.write(key: 'token', value: respObj['data']['token']);
-        // storage.write(
-        //     key: 'refreshToken', value: respObj['data']['refreshToken']);
         AlertManager().displaySnackbarSuccess(context, respObj['message']);
         Navigator.pushNamed(context, '/');
       }
@@ -56,33 +54,4 @@ class AuthService {
       print(e);
     }
   }
-
-  // Future<bool> refreshToken() async {
-  //   var storage = const FlutterSecureStorage();
-  //   var userId = await storage.read(key: 'userId');
-  //   var refreshToken = await storage.read(key: 'refreshToken');
-  //   var url = Uri.parse("${Constants().serverUrl}/auth/refreshToken");
-  //   if (refreshToken != null) {
-  //     var resp = await http.post(url,
-  //         body: jsonEncode(
-  //           {
-  //             "id": userId,
-  //             "refreshToken": refreshToken,
-  //           },
-  //         ),
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         });
-  //     var respObj = jsonDecode(resp.body);
-  //     if (respObj['status'] == true) {
-  //       storage.write(key: 'token', value: respObj['data']['token']);
-  //       storage.write(
-  //           key: 'refreshToken', value: respObj['data']['refreshToken']);
-  //     }
-  //     return true;
-  //   } else {
-  //     print("none");
-  //     return false;
-  //   }
-  // }
 }

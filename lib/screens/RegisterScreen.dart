@@ -142,6 +142,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             child: CirculatorManager()
                                 .isLoadingRegister(_isLoading),
                             onPressed: () async {
+                              if (_isLoading) return;
+                              setState(() {
+                                _isLoading = true;
+                              });
+
                               if (_formKey.currentState!.validate()) {
                                 UserModel user = UserModel(
                                     name: _nameCtrl.text,
@@ -154,11 +159,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   AuthService().register(context, user);
                                   _isLoading = false;
                                 });
+                              } else {
+                                await Future.delayed(
+                                    const Duration(milliseconds: 1000));
+                                setState(() {
+                                  _isLoading = false;
+                                });
                               }
-                              if (_isLoading) return;
-                              setState(() {
-                                _isLoading = true;
-                              });
                             },
                           ),
                         ),

@@ -22,14 +22,14 @@ class AdsModel {
 
   AdsModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'] ?? '';
-    title = json['title'] ?? '';
-    description = json['description'] ?? '';
-    price = json['price'] ?? '';
+    title = json['title'] ?? 'title';
+    description = json['description'] ?? 'description';
+    price = json['price'] ?? '0';
     images = List<String>.from(
         json['images'] ?? ["https://i.ibb.co/wN7ZCYb/gweenpool.jpg"]);
     authorName = json['authorName'] ?? '';
     userId = json['userId'] ?? '';
-    mobile = json['mobile'] ?? '';
+    mobile = json['mobile'] ?? '9999012345';
     createdAt = json['createdAt'] ?? '';
   }
 

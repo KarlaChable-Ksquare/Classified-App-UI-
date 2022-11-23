@@ -107,6 +107,6 @@ class AlertManager {
             ),
           ],
         ),
-        backgroundColor: Colors.white));
+        backgroundColor: Colors.black));
   }
 }

@@ -49,7 +49,7 @@ class GetAllAds {
   void patchPost(AdsModel ad, context) async {
     var resp =
         await MyAdsProvider().patch('/ads/${ad.sId}', ad.toJson(), context);
-    //print(resp['data']); //respuesta al hacer patch
+    //print(resp['data']);
   }
 
   void deletePost(AdsModel ad, context) async {

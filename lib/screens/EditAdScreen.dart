@@ -298,6 +298,11 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                 child:
                                     CirculatorManager().isLoadingAd(_isLoading),
                                 onPressed: () async {
+                                  if (_isLoading) return;
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+
                                   var ad = AdsModel(
                                       sId: widget.data['id'],
                                       authorName: widget.data['authorName'],
@@ -308,16 +313,12 @@ class _EditAdScreenState extends State<EditAdScreen> {
                                       images: _imageServerPath.isNotEmpty
                                           ? _imageServerPath
                                           : widget.data['images']);
-                                  //print(ad.toJson());
+
                                   await Future.delayed(
                                       const Duration(milliseconds: 500));
                                   setState(() {
                                     GetAllAds().patchPost(ad, context);
                                     _isLoading = false;
-                                  });
-                                  if (_isLoading) return;
-                                  setState(() {
-                                    _isLoading = true;
                                   });
                                 },
                               ),
